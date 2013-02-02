@@ -4,7 +4,7 @@
     <div class="container" id="docspage-content">
         
         <div id="action-content" 
-            {%- if prev %} data-prevpage="{{ prev.title }}" data-prevlink="{{ prev.link }}" {%- endif %}
+            {%- if prev and prev.title != "The Book" %} data-prevpage="{{ prev.title }}" data-prevlink="{{ prev.link }}" {%- endif %}
             {%- if next %} data-nextpage="{{ next.title }}" data-nextlink="{{ next.link }}" {%- endif %}
         >
         
