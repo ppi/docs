@@ -3,7 +3,7 @@
 
     <div class="container" id="docspage-content">
         
-        <div id="action-content" data-prevpage="Getting Started" data-prevlink="getting_started.html.php" data-nextpage="Modules" data-nextlink="modules.html.php"
+        <div id="action-content" data-nextpage="Modules" data-nextlink="modules.html.php"
         >
         
             <div class="content-box docs-page">
