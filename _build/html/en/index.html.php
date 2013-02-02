@@ -18,7 +18,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
-<li><a class="reference internal" href="book/getting_started.html.php"><em>Getting Started</em></a></li>
+<li><a class="reference internal" href="book/getting-started.html.php"><em>Getting Started</em></a></li>
 <li><a class="reference internal" href="book/application.html.php"><em>Skeleton Application</em></a></li>
 <li><a class="reference internal" href="book/modules.html.php"><em>Modules</em></a></li>
 <li><a class="reference internal" href="book/routing.html.php"><em>Routing</em></a></li>
