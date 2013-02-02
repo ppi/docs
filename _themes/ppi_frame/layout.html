@@ -1,0 +1,23 @@
+
+{%- block content %}
+
+    <div class="container" id="docspage-content">
+        
+        <div id="action-content" 
+            {%- if prev %} data-prevpage="{{ prev.title }}" data-prevlink="{{ prev.link }}" {%- endif %}
+            {%- if next %} data-nextpage="{{ next.title }}" data-nextlink="{{ next.link }}" {%- endif %}
+        >
+        
+            <div class="content-box docs-page">
+        
+            {%- block document %}
+                {% block body %} {% endblock %}
+            {%- endblock %}
+            
+            </div>
+        
+        </div>
+        
+    </div>
+
+{%- endblock %}
