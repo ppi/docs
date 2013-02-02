@@ -1,4 +1,4 @@
-* :doc:`/book/getting-started`
+* :doc:`/book/getting_started`
 * :doc:`/book/application`
 * :doc:`/book/modules`
 * :doc:`/book/routing`
