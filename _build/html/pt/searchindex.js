@@ -1,1 +1,0 @@
-Search.setIndex({objects:{},terms:{titl:0},objtypes:{},titles:["&lt;no title&gt;"],objnames:{},filenames:["index"]})
