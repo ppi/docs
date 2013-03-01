@@ -12,6 +12,7 @@ If you are comfortable with using **git** then you can download the **"skeleton 
 
     curl -s http://getcomposer.org/installer | php
     php composer.phar install
+    mkdir app/cache && chmod -R 777 app/cache
 
 System requirements
 -------------------
