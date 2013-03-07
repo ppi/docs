@@ -30,7 +30,7 @@ Contributing
 
 The PPI2 documentation is hosted on GitHub:
 
-    https://github.com/ppi/ppi-docs
+    https://github.com/ppi/docs
 
 To submit a contribution, fork the official repository on GitHub and send a [Pull Request](https://help.github.com/articles/using-pull-requests).
 
