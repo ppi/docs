@@ -56,7 +56,7 @@ So lets presume the route is ``/blog/show/{id}``, and look at what your controll
     }
 
 Generating urls using routes
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we are still executing the same route, but making up some urls using route names
 
@@ -83,7 +83,7 @@ Here we are still executing the same route, but making up some urls using route 
     }
 
 Redirecting to routes
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 An extremely handy way to send your users around your application is redirect them to a specific route.
 
@@ -110,7 +110,7 @@ An extremely handy way to send your users around your application is redirect th
     }
 
 Working with ``POST`` values
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -139,7 +139,7 @@ Working with ``POST`` values
     }
 
 Working with QueryString parameters
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -164,7 +164,7 @@ Working with QueryString parameters
     }
 
 Working with server variables
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -193,7 +193,7 @@ Working with server variables
     }
 
 Working with cookies
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -222,7 +222,7 @@ Working with cookies
     }
 
 Working with session values
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 
@@ -251,7 +251,7 @@ Working with session values
     }
 
 Working with the config
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Using the ``getConfig()`` method we can obtain the config array. This config array is the result of ALL the configs returned from all the modules, merged with your application's global config.
 
@@ -284,7 +284,7 @@ Using the ``getConfig()`` method we can obtain the config array. This config arr
     }
 
 Working with the is() method
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``is()`` method is a very expressive way of coding and has a variety of options you can send to it. The method always returns a boolean as you are saying "is this the case?"
 
@@ -315,7 +315,7 @@ The ``is()`` method is a very expressive way of coding and has a variety of opti
     }
 
 Getting the users IP or UserAgent
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Getting the user's IP address or user agent is very trivial.
 
@@ -336,7 +336,7 @@ Getting the user's IP address or user agent is very trivial.
     }
 
 Working with flash messages
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A flash message is a notification that the user will see on the next page that is rendered. It's basically a setting stored in the session so when the user hits the next designated page it will display the message, and then disappear from the session. Flash messages in PPI have different types. These types can be ``'error'``, ``'warning'``, ``'success'``, this will determine the color or styling applied to it. For a success message you'll see a positive green message and for an error you'll see a negative red message.
 
@@ -374,7 +374,7 @@ Review the following action, it is used to delete a blog item and you'll see a d
     }
 
 Getting the current environment
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You may want to perform different scenarios based on the site's environment. This is a configuration value defined in your global application config. The ``getEnv()`` method is how it's obtained.
 
@@ -402,6 +402,5 @@ You may want to perform different scenarios based on the site's environment. Thi
                     break;
 
             }
-
         }
     }
