@@ -1,7 +1,7 @@
 {
-    "name": "noiselabs/ppi-docs",
+    "name": "ppi/ppi-docs",
     "description": "PPI2 Documentation",
-    "keywords": ["php", "framework", "ppi", "noiselabs"],
+    "keywords": ["php", "framework", "ppi", "documentation"],
     "license": "MIT",
     "authors": [
         {

@@ -99,8 +99,8 @@ else:
 # documentation.
 html_theme_options = {
     'analytics_code': 'UA-20964741-1',
-    'github_user': 'noiselabs',
-    'github_repo': 'ppi-docs',
+    'github_user': 'ppi',
+    'github_repo': 'docs',
     'twitter_username': 'ppi_framework',
     'home_url': 'http://ppi.io',
     'disqus_shortname': 'ppiframework',
