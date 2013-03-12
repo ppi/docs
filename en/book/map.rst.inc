@@ -4,3 +4,4 @@
 * :doc:`/book/routing`
 * :doc:`/book/controllers`
 * :doc:`/book/templating`
+* :doc:`/book/services`

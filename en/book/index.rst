@@ -10,5 +10,6 @@ The Book
     routing
     controllers
     templating
+    services
 
 .. include:: /book/map.rst.inc
