@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #
+from __future__ import print_function
 import sys, os
 
 sys.path.append(os.path.abspath('../_exts'))
@@ -91,16 +92,20 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     #html_theme = 'default'
     html_theme = 'ppi'
+    print("Building for ReadTheDocs.org...")
 else:
     html_theme = 'ppi_frame'
+    # This is the file name suffix for HTML files (e.g. ".xhtml").
+    html_file_suffix = ".html.php"
+    print("Building for PPI.io...")
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
     'analytics_code': 'UA-20964741-1',
-    'github_user': 'noiselabs',
-    'github_repo': 'ppi-docs',
+    'github_user': 'ppi',
+    'github_repo': 'docs',
     'twitter_username': 'ppi_framework',
     'home_url': 'http://ppi.io',
     'disqus_shortname': 'ppiframework',
@@ -169,9 +174,6 @@ html_show_copyright = True
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
 html_use_opensearch = ''
-
-# This is the file name suffix for HTML files (e.g. ".xhtml").
-html_file_suffix = ".html.php"
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'PPIdoc'
