@@ -1,0 +1,12 @@
+language: python
+
+before_script:
+  - sudo easy_install sphinx
+
+script:
+  - sh -c "make clean && make html"
+
+notifications:
+    irc: "irc.freenode.org#ppi"
+    email:
+        - vitor@ppi.io

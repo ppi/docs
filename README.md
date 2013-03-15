@@ -3,8 +3,7 @@ PPI Documentation
 
 The [PPI Framework](http://www.ppi.io/) documentation.
 
-
-[![Build Status](https://travis-ci.org/noiselabs/ppi-docs.png?branch=master)](https://travis-ci.org/noiselabs/ppi-docs)
+[![Build Status](https://travis-ci.org/ppi/ppi-docs.png?branch=master)](https://travis-ci.org/ppi/ppi-docs)
 
 Documentation Format
 --------------------
@@ -31,7 +30,7 @@ Contributing
 
 The PPI2 documentation is hosted on GitHub:
 
-    https://github.com/noiselabs/ppi-docs
+    https://github.com/ppi/docs
 
 To submit a contribution, fork the official repository on GitHub and send a [Pull Request](https://help.github.com/articles/using-pull-requests).
 
