@@ -135,4 +135,193 @@ After configuring the database connection information, we need to have a storage
 
     }
 
-As you can see, the class is pretty explanatory by itself, you have
+First of all, we can see the class extends a BaseController class, which is a Shared Storage class, where we can place reusable code for all of our storage classes.
+
+.. code-block:: php
+
+    <?php
+
+    namespace UserModule\Storage;
+    use PPI\DataSource\ActiveQuery;
+    class Base extends ActiveQuery
+    {
+        public function sharedFunction()
+        {
+            // code here...
+        }
+    }
+
+As you can see, the storage class is pretty explanatory by itself, you have a set of functions that perform specific tasks on the database; please note the use of the Doctrine DBAL Query Builder. Let's see how it works:
+
+.. code-block:: php
+
+    public function getByUsername($username)
+    {
+
+        $row = $this->createQueryBuilder()
+            ->select('u.*')
+            ->from($this->getTableName(), 'u')
+            ->andWhere('u.username = :username')
+            ->setParameter(':username', $username)
+            ->execute()
+            ->fetch($this->getFetchMode());
+
+        if ($row === false) {
+            throw new \Exception('Unable to find user record by username: ' . $username);
+        }
+
+        return new UserEntity($row);
+
+    }
+
+.. citations::
+    Doctrine 2.1 ships with a powerful query builder for the SQL language. This QueryBuilder object has methods to add parts to an SQL statement. If you built the complete state you can execute it using the connection it was generated from. The API is roughly the same as that of the DQL Query Builder. For more information please refer to http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
+
+Entities
+~~~~~~~~
+
+The previous function returns an object called UserEntity, you may be wondering, what is thaat, right? well, an Entity is just an object representing a record in a table. Now, let's see how does an Entity class looks like:
+
+.. code-block:: php
+
+    <?php
+
+    namespace UserModule\Entity;
+
+    class User
+    {
+
+        protected $_id = null;
+        protected $_username = null;
+        protected $_firstname = null;
+        protected $_lastname = null;
+        protected $_email = null;
+
+        public function __construct(array $data)
+        {
+            foreach ($data as $key => $value) {
+                if (property_exists($this, '_' . $key)) {
+                    $this->{'_' . $key} = $value;
+                }
+            }
+
+        }
+
+        public function getID()
+        {
+            return $this->_id;
+        }
+
+        public function getFirstName()
+        {
+            return $this->_firstname;
+        }
+
+        public function getLastName()
+        {
+            return $this->_lastname;
+        }
+
+        public function getFullName()
+        {
+            return $this->getFirstName() . ' ' . $this->getLastName();
+        }
+
+        public function getEmail()
+        {
+            return $this->_email;
+        }
+
+        public function setUsername($username)
+        {
+            $this->_username = $username;
+        }
+
+        public function getUsername()
+        {
+            return $this->_username;
+        }
+
+    }
+
+Fetching Data
+~~~~~~~~~~~~~~~~~~~~~~~
+
+We have covered so far the Storage and Entities classes, now let's see how it actually works, for that, let's put a sample code:
+
+ .. code-block:: php
+
+    <?php
+    namespace UserModule\Controller;
+
+    use UserModule\Controller\Shared as SharedController;
+
+    class Profile extends SharedController
+    {
+
+        public function viewAction()
+        {
+
+            // Get the username from the route params
+            $username = $this->getRouteParam('username');
+
+            // Instantiate the storage service
+            $storage  = $this->getService('user.storage');
+
+            // Fetch the user by username
+            // This returns a UserEntity Object
+            $user     = $storage->getByUsername($username);
+
+
+            // Using the UserEntity Object is that simple:
+            echo $user->getFullName(); // Returns the user's full name.
+        }
+    }
+
+Inserting Data
+~~~~~~~~~~~~~~
+
+In the previous section we saw how to fetch information from the database, now, let's see how to insert it.
+
+.. code-block:: php
+
+    <?php
+    namespace UserModule\Controller;
+
+    use UserModule\Controller\Shared as SharedController;
+
+    class Profile extends SharedController
+    {
+
+        public function createAction()
+        {
+
+            // Assuming we're getting the info
+            // from a submited form through POST
+            $post     = $this->post();
+
+            // Instantiate the storage service
+            $storage  = $this->getService('user.storage');
+
+            // @todo You've got to add some codes here
+            // To check for missing fields, or fields being empty.
+
+            // Prepare user array for insertion
+            $user     = array(
+                'email'      => $post['userEmail'],
+                'firstname'  => $post['userFirstName'],
+                'lastname'   => $post['userLastName'],
+                'username'   => $post['userName']
+            );
+
+            // Create the user
+            $newUserID = $storage->create($user);
+
+            // Successful registration. \o/
+            $this->setFlash('success', 'User created');
+            return $this->redirectToRoute('User_Thankyou_Page');
+
+        }
+
+    }
+
