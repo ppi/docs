@@ -101,7 +101,7 @@ Production Apache Configuration
 
 We take **security** very seriously, so all your app code and configuration is kept hidden away outside of ``/public/`` and is inaccesible via the browser, because of that we need to create a virtual host in order to route all web requests to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally and the .htaccess rule kicks in to route all non-asset files to ``/public/index.php``.
 
-.. code-block:: bash
+.. code-block:: apache
 
     <VirtualHost *:80>
         DocumentRoot /var/www/ppiapplication/public

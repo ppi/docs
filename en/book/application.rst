@@ -80,7 +80,7 @@ The ``/public/index.php`` is also known as your bootstrap file, or front control
 Switching between environments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PPI supports the notion of "environments" to make the application behave differently from when you are coding and testing the application in your laptop to when you deploy it to a production server.
+PPI supports the notion of "environments" to make the application behave differently from when you are coding and testing the application in your laptop to when you deploy it to a production server. While in *production* debug messages won't be logged, your application won't stop due to non-fatal PHP errors and we'll use caching wherever possible. In *development* you'll get everything!
 
 To switch between the *development* and *production* environments simply set the ``PPI\App($environment, $debug)`` parameters in your front controller:
 
@@ -110,25 +110,48 @@ The app.yml file
 
 Looking at the example config file below, you can control things here such as the environment, templating engine and datasource connection.
 
-.. code-block:: php
+.. configuration-block::
 
-    <?php
-    $config = array(
-        'environment' => 'development', // <-- Change this depending on your environment
-        'templating.engine' => 'php', // <-- The default templating engine
-        'datasource.connections' => include (__DIR__ . '/datasource.config.php')
-    );
+    .. code-block:: yaml
 
-    // Are we in debug mode ?
-    if($config['environment'] !== 'development') { // <-- You can also check the env from your controller using
-        $this->getEnv()
-        $config['debug'] = $config['environment'] === 'development';
-        $config['cache_dir'] = __DIR__ . '/cache';
-    }
+        imports:
+            - { resource: datasource.yml }
+            - { resource: modules.yml }
 
-    return $config; // Very important
+        templating:
+            engines: ["php", "smarty", "twig"]
+            globals:
+                - ga_tracking: "UA-XXXXX-X"
 
-The ``return $config`` line gets pulled into your ``index.php``'s ``$app->config`` variable.
+        skeleton.module.path: "./utils/skeleton_module"
+
+        monolog:
+            handlers:
+                main:
+                    type:  stream
+                    path:  %app.logs_dir%/%app.environment%.log
+                    level: debug
+
+    .. code-block:: php
+
+        $config = array(
+            'templating'    => array(
+                'engines'     => array('php', 'smarty', 'twig'),
+                'globals'     => array(
+                    'ga_tracking' => 'UA-XXXXX-X',
+                ),
+            ),
+            'datasource' => array(
+                    'connections' => include (__DIR__ . '/datasource.php')
+            ),
+            'skeleton.module.path'   => './utils/skeleton_module',
+        );
+
+        $config = array_merge($config, require_once 'modules.php');
+
+        return $config;
+
+
 
 The modules.config.php file
 ---------------------------
