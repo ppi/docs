@@ -6,7 +6,7 @@ Downloading PPI
 
 You can download the PPI skeletonaapp from the `PPI Homepage <http://www.ppi.io/>`_. If you just want everything in one folder ready to go, you should choose the **"ppi skeletonapp with vendors"** option.
 
-If you are comfortable with using **git** then you can download the **"skeleton app without vendors"** option and run the following commands:
+If you are comfortable with the command line then you can download the **"skeleton app without vendors"** option and run the following commands:
 
 .. code-block:: bash
 

@@ -108,7 +108,7 @@ This is where all your apps global items go such as app config, datasource confi
 The app.yml file
 ----------------
 
-Looking at the example config file below, you can control things here such as the environment, templating engine and datasource connection.
+Looking at the example config file below, you can control things here such as the enabled templating engines, the datasource connection and the logger (``monolog``).
 
 .. configuration-block::
 
@@ -118,10 +118,11 @@ Looking at the example config file below, you can control things here such as th
             - { resource: datasource.yml }
             - { resource: modules.yml }
 
-        templating:
-            engines: ["php", "smarty", "twig"]
-            globals:
-                - ga_tracking: "UA-XXXXX-X"
+        framework:
+            view:
+                engines: ["php", "smarty", "twig"]
+                globals:
+                    - ga_tracking: "UA-XXXXX-X"
 
         skeleton.module.path: "./utils/skeleton_module"
 
@@ -134,39 +135,92 @@ Looking at the example config file below, you can control things here such as th
 
     .. code-block:: php
 
-        $config = array(
-            'templating'    => array(
-                'engines'     => array('php', 'smarty', 'twig'),
-                'globals'     => array(
-                    'ga_tracking' => 'UA-XXXXX-X',
+        <?php
+        $connections = require __DIR__ . '/datasource.php';
+        $modules     = require __DIR__ . 'modules.php';
+
+        return array_merge(array(
+            'framework' => array(
+                'view'      => array(
+                    'engines'   => array('php', 'smarty', 'twig'),
+                    'globals'   => array(
+                        'ga_tracking'   => 'UA-XXXXX-X',
+                    ),
+                ),
+                'datasource' => array(
+                    'connections' => $connections
                 ),
             ),
-            'datasource' => array(
-                    'connections' => include (__DIR__ . '/datasource.php')
-            ),
             'skeleton.module.path'   => './utils/skeleton_module',
+
+        ), $modules);
+
+The datasource.yml file
+-----------------------
+
+The ``datasource.yml`` is where you setup your database connection information.
+
+.. warning::
+    Because this file may hold sensitive information consider not adding it to your source control system.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        framework:
+            datasource:
+                connections:
+                    main:
+                        type:   'pdo_mysql'
+                        host:   'localhost'
+                        dbname: 'ppi2_skeleton'
+                        user:   'root'
+                        pass:   'secret'
+
+    .. code-block:: php
+
+        <?php
+        return array(
+            'main' => array(
+                'type'   => 'pdo_mysql',    // This can be any pdo driver. i.e: pdo_sqlite
+                'host'   => 'localhost',
+                'dbname' => 'ppi2_skeleton',
+                'user'   => 'root',
+                'pass'   => 'secret'
+            )
         );
 
-        $config = array_merge($config, require_once 'modules.php');
 
-        return $config;
-
-
-
-The modules.config.php file
----------------------------
+The modules.yml file
+--------------------
 
 The example below shows that you can control which modules are active and a list of directories module_paths that PPI will scan for your modules. Pay close attention to the order in which your modules are loaded. If one of your modules relies on resources loaded by another module. Make sure the module loading the resources is loaded before the others that depend upon it.
 
-.. code-block:: php
+.. configuration-block::
 
-    <?php
-    return array(
-        'activeModules'   => array('Application', 'User'),
-        'listenerOptions' => array('module_paths' => array('./modules')),
-    );
+    .. code-block:: yaml
 
-Note that this file returns an array too, which is assigned against your ``index.php``'s $app->moduleConfig variable
+        modules:
+            - Framework
+            - Application
+            - UserModule
+
+        module_listener_options:
+            module_paths: ['./modules', './vendor']
+
+    .. code-block:: php
+
+        <?php
+        return array(
+            'modules' => array(
+                'Framework',
+                'Application',
+                'UserModule',
+            ),
+            'module_listener_options' => array(
+                'module_paths' => array('./modules', './vendor')
+            ),
+        );
 
 The app/views folder
 --------------------
@@ -195,4 +249,4 @@ Now everything from your module template will be applied into your base.html.php
 The modules folder
 -------------------
 
-This is where we get stuck into the real details, we're going into the ``/modules/`` folder. Click the next section to proceed
+This is where we get stuck into the real details, we're going into the ``/modules/`` folder. Click the next section to proceed.
