@@ -3,7 +3,7 @@ PPI Documentation
 
 The [PPI Framework](http://www.ppi.io/) documentation.
 
-[![Build Status](https://travis-ci.org/ppi/ppi-docs.png?branch=master)](https://travis-ci.org/ppi/ppi-docs)
+[![Build Status](https://travis-ci.org/ppi/docs.png?branch=2.1)](https://travis-ci.org/ppi/docs)
 
 Documentation Format
 --------------------
