@@ -4,7 +4,7 @@ Getting Started
 Downloading PPI
 ---------------
 
-You can download the ppi skeletonaapp from the `PPI Homepage <http://www.ppi.io/>`_. If you just want everything in one folder ready to go, you should choose the **"ppi skeletonapp with vendors"** option.
+You can download the PPI skeletonaapp from the `PPI Homepage <http://www.ppi.io/>`_. If you just want everything in one folder ready to go, you should choose the **"ppi skeletonapp with vendors"** option.
 
 If you are comfortable with using **git** then you can download the **"skeleton app without vendors"** option and run the following commands:
 
@@ -113,3 +113,7 @@ We take **security** very seriously, so all your app code and configuration is k
             Options +Indexes +FollowSymLinks
         </Directory>
     </VirtualHost>
+
+----
+
+Now that your environment is properly set up move to the :ref:`skeleton-application` section to see an overview of the directory structure and learn the basics on how to configure the framework.
