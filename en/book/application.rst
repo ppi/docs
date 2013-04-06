@@ -1,34 +1,50 @@
+.. index::
+   single: Skeleton Application
+
+.. _`skeleton-application`:
 
 Skeleton Application
-==========================
+====================
 
-First, lets review the file structure of the PPI skeleton application that we have pre-built for you to get up and running as quickly as possible.::
+The skeleton application is a fully-functional application that we have pre-built for you to get up and running as quickly as possible. Inside you'll find the PHP libraries (``vendor`` dir), a selection of useful modules, our recommended directory structure and some default configuration.
 
-    www/ <- your web root directory
+First, lets review the file structure of the PPI skeleton application:
 
-    skeleton/ <- the unpacked archive
-        app/
-            app.config.php
-            cache/
-            views/
-            ...
+.. code-block:: bash
 
-        public/
-            index.php
-            css/
-            js/
-            images/
-            ...
+    www/    <- your web root directory
 
-        modules/
-            Application/
-                Module.php
-                Controller/
-                resources/
-                    config/
-                    views/
-                    ...
+        skeleton/   <- the unpacked archive
 
+            app/
+                config/
+                    app.yml
+                    datasource.yml
+                    modules.yml
+                cache/
+                logs/
+                views/
+                ...
+
+            modules/
+                Application/
+                    Module.php
+                    Controller/
+                    resources/
+                        config/
+                        views/
+                        ...
+
+            public/
+                index.php
+                css/
+                js/
+                images/
+                ...
+
+            vendor/
+                ppi/
+                ...
 
 Lets break it down into parts:
 
@@ -40,7 +56,7 @@ The structure above shows you the ``/public/`` folder. Anything outside of ``/pu
 The public index.php file
 -------------------------
 
-The /public/index.php is also known are your bootstrap file, or front controller is explained in-depth below
+The ``/public/index.php`` is also known as your bootstrap file, or front controller and is presented below:
 
 .. code-block:: php
 
@@ -50,27 +66,47 @@ The /public/index.php is also known are your bootstrap file, or front controller
     chdir(dirname(__DIR__));
 
     // Lets include PPI
-    include('app/init.php');
+    require_once 'app/init.php';
 
-    // Initialise our PPI App
-    $app = new PPI\App();
-    $app->moduleConfig = include 'app/modules.config.php';
-    $app->config = include 'app/app.config.php';
+    // Create our PPI App instance
+    $app = new PPI\App('production', false);
 
-    // If you are using the DataSource component, enable this
-    //$app->useDataSource = true;
+    // Configure the application (app/config/app.yml)
+    $app->loadConfig('app.yml');
 
-    $app->boot()->dispatch();
+    // Load the application, match the URL and send an HTTP response
+    $app->boot()->dispatch()->send();
 
-If you uncomment the ``useDataSource`` line, it is going to look for your ``/app/datasource.config.php`` and load that into the DataSource component for you. Databases are not a requirement in PPI so if you dont need one then you wont need to bother about this. More in-depth documentation about this in the DataSource chapter.
+Switching between environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PPI supports the notion of "environments" to make the application behave differently from when you are coding and testing the application in your laptop to when you deploy it to a production server.
+
+To switch between the *development* and *production* environments simply set the ``PPI\App($environment, $debug)`` parameters in your front controller:
+
+.. code-block:: php
+
+    // Development
+    $app = new PPI\App('development', true);
+
+    // Production
+    $app = new PPI\App('production', false);
+
+.. todo::
+
+    Show an example of using two front controllers (``index.php``, ``index_development.php``) and a symlink to switch between environments. Alternatively provide an example with setting the environment by setting Apache environment variables.
 
 The app folder
 --------------
 
 This is where all your apps global items go such as app config, datasource config and modules config and global templates (views). You wont need to touch these out-of-the-box but it allows for greater flexibility in the future if you need it.
 
-The app.config.php file
------------------------
+.. note::
+
+    In 2.1 we changed the default configuration file format from PHP to YAML because (we think) it is less verbose and faster to type but don't worry because PHP configuration files are and will always be supported.
+
+The app.yml file
+----------------
 
 Looking at the example config file below, you can control things here such as the environment, templating engine and datasource connection.
 
