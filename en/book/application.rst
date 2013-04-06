@@ -132,7 +132,8 @@ Looking at the example config file below, you can control things here such as th
                 globals:
                     - ga_tracking: "UA-XXXXX-X"
 
-        skeleton.module.path: "./utils/skeleton_module"
+            skeleton_module:
+                path: "./utils/skeleton_module"
 
         monolog:
             handlers:
@@ -144,24 +145,27 @@ Looking at the example config file below, you can control things here such as th
     .. code-block:: php
 
         <?php
-        $connections = require __DIR__ . '/datasource.php';
-        $modules     = require __DIR__ . 'modules.php';
+        $config = array();
 
-        return array_merge(array(
-            'framework' => array(
-                'templating'      => array(
-                    'engines'   => array('php', 'smarty', 'twig'),
-                    'globals'   => array(
-                        'ga_tracking'   => 'UA-XXXXX-X',
-                    ),
-                ),
-                'datasource' => array(
-                    'connections' => $connections
+        $config['framework'] = array(
+            'templating' => array(
+                'engines'     => array('php', 'smarty', 'twig'),
+                'globals'     => array(
+                    'ga_tracking' => 'UA-XXXXX-X',
                 ),
             ),
-            'skeleton.module.path'   => './utils/skeleton_module',
+            'skeleton_module'   => array(
+                'path'  => './utils/skeleton_module'
+            )
+        );
 
-        ), $modules);
+        $config['datasource'] => array(
+            'connections' = require __DIR__ . '/datasource.php'
+        );
+
+        $config['modules'] = require __DIR__ . 'modules.php';
+
+        return $config;
 
 .. tip::
     The configuration shown above is not exhaustive. For a complete listing of the available configuration options please check the sections in the  :doc:`/reference/index` chapter.
@@ -178,15 +182,14 @@ The ``datasource.yml`` is where you setup your database connection information.
 
     .. code-block:: yaml
 
-        framework:
-            datasource:
-                connections:
-                    main:
-                        type:   'pdo_mysql'
-                        host:   'localhost'
-                        dbname: 'ppi2_skeleton'
-                        user:   'root'
-                        pass:   'secret'
+        datasource:
+            connections:
+                main:
+                    type:   'pdo_mysql'
+                    host:   'localhost'
+                    dbname: 'ppi2_skeleton'
+                    user:   'root'
+                    pass:   'secret'
 
     .. code-block:: php
 
@@ -212,18 +215,19 @@ The example below shows that you can control which modules are active and a list
     .. code-block:: yaml
 
         modules:
-            - Framework
-            - Application
-            - UserModule
+            active_modules:
+                - Framework
+                - Application
+                - UserModule
 
-        module_listener_options:
-            module_paths: ['./modules', './vendor']
+            module_listener_options:
+                module_paths: ['./modules', './vendor']
 
     .. code-block:: php
 
         <?php
         return array(
-            'modules' => array(
+            'active_modules' => array(
                 'Framework',
                 'Application',
                 'UserModule',
