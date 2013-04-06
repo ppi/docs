@@ -4,6 +4,8 @@
 Monolog Configuration Reference
 ===============================
 
+Monolog_ is a logging library for PHP 5.3 used by PPI. It is inspired by the Python LogBook library.
+
 .. configuration-block::
 
     .. code-block:: yaml
@@ -36,7 +38,7 @@ Monolog Configuration Reference
                     priority:             0
                     level:                DEBUG
                     bubble:               true
-                    path:                 "%kernel.logs_dir%/%kernel.environment%.log"
+                    path:                 "%app.logs_dir%/%app.environment%.log"
                     ident:                false
                     facility:             user
                     max_files:            0
@@ -60,3 +62,4 @@ Monolog Configuration Reference
                         elements:             []
                     formatter:            ~
 
+.. _Monolog: https://github.com/Seldaek/monolog

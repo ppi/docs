@@ -110,7 +110,7 @@ and depends on `gc_divisor`_ and `gc_probability`_.
 save_path
 .........
 
-**type**: ``string`` **default**: ``%kernel.cache.dir%/sessions``
+**type**: ``string`` **default**: ``%app.cache.dir%/sessions``
 
 This determines the argument to be passed to the save handler. If you choose
 the default file handler, this is the path where the files are created. You can
@@ -121,14 +121,14 @@ value to ``null``:
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/app.yml
         framework:
             session:
                 save_path: null
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/app.php
         return array(
         'framework' => array(
             'session' => array(
@@ -164,7 +164,7 @@ collections. URLs starting with ``http://`` will only be added to the
     because developers will typically define base URL's for each environment.
     Given that most projects tend to inherit configurations
     (e.g. ``config_test.yml`` imports ``config_dev.yml``) and/or share a common
-    base configuration (i.e. ``config.yml``), merging could yield a set of base
+    base configuration (i.e. ``app.yml``), merging could yield a set of base
     URL's for multiple environments.
 
 .. _ref-framework-assets-version:
@@ -198,14 +198,14 @@ Now, activate the ``assets_version`` option:
 
     .. code-block:: yaml
 
-        # app/config/config.yml
+        # app/config/app.yml
         framework:
             # ...
             templating: { engines: ['twig'], assets_version: v2 }
 
     .. code-block:: php
 
-        // app/config/config.php
+        // app/config/app.php
         return array(
         'framework' => array(
             ...,
@@ -292,7 +292,7 @@ Full Default Configuration
                 gc_divisor:           ~
                 gc_probability:       ~
                 gc_maxlifetime:       ~
-                save_path:            %kernel.cache_dir%/sessions
+                save_path:            %app.cache_dir%/sessions
 
             # templating configuration
             templating:

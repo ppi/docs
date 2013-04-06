@@ -127,7 +127,7 @@ Looking at the example config file below, you can control things here such as th
             - { resource: modules.yml }
 
         framework:
-            view:
+            templating:
                 engines: ["php", "smarty", "twig"]
                 globals:
                     - ga_tracking: "UA-XXXXX-X"
@@ -149,7 +149,7 @@ Looking at the example config file below, you can control things here such as th
 
         return array_merge(array(
             'framework' => array(
-                'view'      => array(
+                'templating'      => array(
                     'engines'   => array('php', 'smarty', 'twig'),
                     'globals'   => array(
                         'ga_tracking'   => 'UA-XXXXX-X',
@@ -164,7 +164,7 @@ Looking at the example config file below, you can control things here such as th
         ), $modules);
 
 .. tip::
-    The configuration shown above is not exhaustive. For a complete listing of available configuration options please check the sections in the  :doc:`/reference/index` chapter.
+    The configuration shown above is not exhaustive. For a complete listing of the available configuration options please check the sections in the  :doc:`/reference/index` chapter.
 
 The datasource.yml file
 -----------------------
