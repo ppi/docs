@@ -1,3 +1,6 @@
+.. index::
+   single: Getting started
+
 Getting Started
 ===============
 
@@ -116,4 +119,4 @@ We take **security** very seriously, so all your app code and configuration is k
 
 ----
 
-Now that your environment is properly set up move to the :ref:`skeleton-application` section to see an overview of the directory structure and learn the basics on how to configure the framework.
+Now that your environment is properly set up move to the :doc:`/book/application` section to see an overview of the directory structure and learn the basics on how to configure the framework.

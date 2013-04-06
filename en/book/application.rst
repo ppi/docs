@@ -12,39 +12,47 @@ First, lets review the file structure of the PPI skeleton application:
 
 .. code-block:: bash
 
-    www/    <- your web root directory
-
-        skeleton/   <- the unpacked archive
-
-            app/
-                config/
-                    app.yml
-                    datasource.yml
-                    modules.yml
-                cache/
-                logs/
-                views/
-                ...
-
-            modules/
-                Application/
-                    Module.php
-                    Controller/
-                    resources/
-                        config/
-                        views/
-                        ...
-
-            public/
-                index.php
-                css/
-                js/
-                images/
-                ...
-
-            vendor/
-                ppi/
-                ...
+    www/                                        # your web root directory
+    |
+    └── skeleton/                               # the unpacked archive
+        |
+        ├── app/
+        │   ├── console                         # CLI script to help debug the application
+        │   ├── init.php
+        │   ├── config/                         # application configuration files
+        │   │   ├── app.yml
+        │   │   ├── datasource.yml
+        │   │   └── modules.yml
+        │   ├── cache/                          # application cache (must be writable by the web server)
+        │   ├── logs/                           # application logs  (must be writable by the web server)
+        │   └── views/                          # global template (view) files
+        │       └── base.html.php
+        │
+        ├── modules/                            # application modules
+        │   ├── Application/
+        │   │   ├── Classes/
+        │   │   │   └── SomeClass.php
+        │   │   ├── Controller/
+        │   │   │   ├── Index.php
+        │   │   │   └── Shared.php
+        │   │   ├── Module.php
+        │   │   └── resources/
+        │   │       ├── config/
+        │   │       │   ├── config.yml
+        │   │       │   └── routes.yml          # routing rules
+        │   │       └── views/
+        │   │           └── index/
+        │   │               └── index.html.php
+        │   ├── Framework/
+        │   └── UserModule/
+        │
+        ├── public/
+        │   ├── index.php                       # front controller
+        │   ├── css/
+        │   ├── images/
+        │   └── js/
+        │
+        └── vendor/                             # libraries installed by Composer
 
 Lets break it down into parts:
 
@@ -154,6 +162,9 @@ Looking at the example config file below, you can control things here such as th
             'skeleton.module.path'   => './utils/skeleton_module',
 
         ), $modules);
+
+.. tip::
+    The configuration shown above is not exhaustive. For a complete listing of available configuration options please check the sections in the  :doc:`/reference/index` chapter.
 
 The datasource.yml file
 -----------------------
