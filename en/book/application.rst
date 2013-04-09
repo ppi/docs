@@ -77,7 +77,10 @@ The ``/public/index.php`` is also known as your bootstrap file, or front control
     require_once 'app/init.php';
 
     // Create our PPI App instance
-    $app = new PPI\App('production', false);
+    $app = new PPI\App(array(
+        'environment'   => 'production',
+        'debug'         => false
+    ));
 
     // Configure the application (app/config/app.yml)
     $app->loadConfig('app.yml');
@@ -90,15 +93,21 @@ Switching between environments
 
 PPI supports the notion of "environments" to make the application behave differently from when you are coding and testing the application in your laptop to when you deploy it to a production server. While in *production* debug messages won't be logged, your application won't stop due to non-fatal PHP errors and we'll use caching wherever possible. In *development* you'll get everything!
 
-To switch between the *development* and *production* environments simply set the ``PPI\App($environment, $debug)`` parameters in your front controller:
+To switch between the *development* and *production* environments simply set the ``PPI\App(array $options)`` parameters in your front controller:
 
 .. code-block:: php
 
     // Development
-    $app = new PPI\App('development', true);
+    $app = new PPI\App(array(
+        'environment'   => 'development',
+        'debug'         => true
+    ));
 
     // Production
-    $app = new PPI\App('production', false);
+    $app = new PPI\App(array(
+        'environment'   => 'production',
+        'debug'         => false
+    ));
 
 .. todo::
 
