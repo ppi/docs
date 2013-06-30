@@ -17,6 +17,7 @@ If you are comfortable with the command line then you can download the **"skelet
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install
     $ mkdir app/cache && chmod -R 777 app/cache
+    $ mkdir app/logs && chmod -R 777 app/logs
 
 System requirements
 -------------------
@@ -99,24 +100,46 @@ If you want to use DataSource, you will need to have PDO installed. Additionally
 you need to have the PDO driver installed for the database server you want
 to use.
 
-Production Apache Configuration
--------------------------------
+Apache Configuration
+--------------------
 
-We take **security** very seriously, so all your app code and configuration is kept hidden away outside of ``/public/`` and is inaccesible via the browser, because of that we need to create a virtual host in order to route all web requests to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally and the .htaccess rule kicks in to route all non-asset files to ``/public/index.php``.
+We take **security** very seriously, so all your app code and configuration is kept hidden away outside of ``/public/``
+and is inaccessible via the browser. Because of that we need to create a virtual host in order to route all web requests
+to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally and the ``.htaccess``
+rule kicks in to route all non-asset files to ``/public/index.php``.
+
+Virtual host
+~~~~~~~~~~~~
+
+We are now creating an Apache virtual host for the application to make http://skeletonapp.ppi.localhost serve
+``index.php`` from the ``skeletonapp/public`` directory.
 
 .. code-block:: apache
 
     <VirtualHost *:80>
-        DocumentRoot /var/www/ppiapplication/public
-        ServerName www.myppiwebsite.com
-        RewriteEngine On
-        ErrorLog /var/log/apache2/error.log
-        <Directory "/var/www/ppiapplication/public">
-            AllowOverride All
-            Options +Indexes +FollowSymLinks
-        </Directory>
+           ServerName    skeletonapp.ppi.localhost
+           DocumentRoot  "/var/www/skeleton/public"
+           SetEnv        PPI_ENV dev
+           SetEnv        PPI_DEBUG true
+
+           <Directory "/var/www/skeleton/public">
+                AllowOverride All
+                Allow from all
+                DirectoryIndex index.php
+                Options Indexes FollowSymLinks
+           </Directory>
     </VirtualHost>
+
+You will need to update the ``/etc/hosts`` or ``c:\windows\system32\drivers\etc\hosts`` file so that your system knows
+how to resolve ``skeletonapp.ppi.localhost``::
+
+    127.0.0.1               skeletonapp.ppi.localhost localhost
+
+Restart your web server. The skeletonapp website can now be accessed using http://skeletonapp.ppi.localhost/. Welcome!
+
+.. image:: ../../_static/skeletonapp-ppi-localhost.png
 
 ----
 
-Now that your environment is properly set up move to the :doc:`/book/application` section to see an overview of the directory structure and learn the basics on how to configure the framework.
+Now that your environment is properly set up move to the :doc:`/book/application` section to see an overview of the
+directory structure and learn the basics on how to configure the framework.
