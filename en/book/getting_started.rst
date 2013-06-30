@@ -16,8 +16,7 @@ If you are comfortable with the command line then you can download the **"skelet
     $ cd /path/to/skeletonapp
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install
-    $ mkdir app/cache && chmod -R 777 app/cache
-    $ mkdir app/logs && chmod -R 777 app/logs
+    $ mkdir {app/cache,app/logs} && chmod -R 777 {app/cache,app/logs}
 
 System requirements
 -------------------

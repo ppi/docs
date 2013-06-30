@@ -127,8 +127,8 @@ All the modules with getConfig()defined on them will be merged together to creat
     }
 
 .. tip::
-    To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command.
-        
+    To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command::
+
         $ app/console config:dump
         framework:
             templating:
