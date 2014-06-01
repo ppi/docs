@@ -13,12 +13,8 @@ Alternatively you can clone the repo. Notice the branch version is 2.1:
 .. code-block:: bash
 
     $ git clone git@github.com:ppi/skeletonapp.git /path/to/skeletonapp
-
-If you are comfortable with the command line then you can download the **"skeleton app without vendors"** option and run the following commands:
-
-.. code-block:: bash
-
     $ cd /path/to/skeletonapp
+    $ git checkout 2.1
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install
     $ mkdir {app/cache,app/logs} && chmod -R 777 {app/cache,app/logs}
