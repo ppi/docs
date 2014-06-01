@@ -26,7 +26,8 @@ PPI needs **PHP 5.3.10** or above and a web server with its rewrite module enabl
 
 To easily check if your system passes all requirements, PPI provides two ways and we recommend you do both.
 
-First method is the **app/check** script, that can be run from the command line
+First method is the **app/check** script, that can be run from the command line.
+
 Second method is the web based **check.php** script that's accessible via: http://skeletonapp.ppi.localhost/check.php
 
 Why do we have both scripts? Because your CLI environment can have a separate **php.ini** file from your web environment so this will ensure you're good to go from both sides.
