@@ -135,6 +135,7 @@ We are now creating an Apache virtual host for the application to make http://sk
         </Directory>
     </VirtualHost>
     
+    
 Nginx Virtual Host
 ~~~~~~~~~~~~~~~~~~~
 
