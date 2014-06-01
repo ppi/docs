@@ -27,7 +27,7 @@ PPI needs **PHP 5.3.10** or above and a web server with its rewrite module enabl
 To easily check if your system passes all requirements, PPI provides two ways and we recommend you do both.
 
 * First method is the **app/check** script, that can be run from the command line.
-* Second method is the web based **check.php** script that's accessible via: http://skeletonapp.ppi.localhost/check.php
+* Second method is the web based **check.php** script that's accessible via: http://skeletonapp.ppi/check.php
 
 Why do we have both scripts? Because your CLI environment can have a separate **php.ini** file from your web environment so this will ensure you're good to go from both sides.
 
@@ -105,42 +105,67 @@ If you want to use DataSource, you will need to have PDO installed. Additionally
 you need to have the PDO driver installed for the database server you want
 to use.
 
-Apache Configuration
---------------------
+Web Server Configuration
+-------------------------
 
-We take **security** very seriously, so all your app code and configuration is kept hidden away outside of ``/public/``
-and is inaccessible via the browser. Because of that we need to create a virtual host in order to route all web requests
-to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally and the ``.htaccess``
-rule kicks in to route all non-asset files to ``/public/index.php``.
+We take **security** seriously, as a result all your app code and configuration is kept hidden away outside of ``/public/``
+and is inaccessible via the browser. Therefore we need to create a virtual host in order to route all web requests
+to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally. The ``.htaccess`` or web server's rewrite rules
+ kick in which route all non-asset files to ``/public/index.php``.
 
-Virtual host
-~~~~~~~~~~~~
+Apache Virtual Host
+~~~~~~~~~~~~~~~~~~~
 
-We are now creating an Apache virtual host for the application to make http://skeletonapp.ppi.localhost serve
+We are now creating an Apache virtual host for the application to make http://skeletonapp.ppi serve
 ``index.php`` from the ``skeletonapp/public`` directory.
 
 .. code-block:: apache
 
     <VirtualHost *:80>
-           ServerName    skeletonapp.ppi.localhost
-           DocumentRoot  "/var/www/skeleton/public"
-           SetEnv        PPI_ENV dev
-           SetEnv        PPI_DEBUG true
-
-           <Directory "/var/www/skeleton/public">
-                AllowOverride All
-                Allow from all
-                DirectoryIndex index.php
-                Options Indexes FollowSymLinks
-           </Directory>
+        ServerName    skeletonapp.ppi
+        DocumentRoot  "/var/www/skeleton/public"
+        SetEnv        PPI_ENV dev
+        SetEnv        PPI_DEBUG true
+    
+        <Directory "/var/www/skeleton/public">
+            AllowOverride All
+            Allow from all
+            DirectoryIndex index.php
+            Options Indexes FollowSymLinks
+        </Directory>
     </VirtualHost>
+    
+Nginx Virtual Host
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block::nginx 
+
+    server {
+        listen 80;
+        server_name skeletonapp.ppi;
+        root /var/www/skeleton/public;
+        index index.php;
+        
+        location / {
+            try_files $uri /index.php$is_args$args;
+        }
+        
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param HTTPS off;
+        }
+        
+    }
+
 
 You will need to update the ``/etc/hosts`` or ``c:\windows\system32\drivers\etc\hosts`` file so that your system knows
-how to resolve ``skeletonapp.ppi.localhost``::
+how to resolve ``skeletonapp.ppi``::
 
-    127.0.0.1               skeletonapp.ppi.localhost localhost
+    127.0.0.1               skeletonapp.ppi
 
-Restart your web server. The skeletonapp website can now be accessed using http://skeletonapp.ppi.localhost/. Welcome!
+Restart your web server. The skeletonapp website can now be accessed using http://skeletonapp.ppi. Welcome!
 
 .. image:: ../../_static/skeletonapp-ppi-localhost.png
 
