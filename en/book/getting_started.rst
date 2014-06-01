@@ -12,12 +12,12 @@ Alternatively you can clone the repo. Notice the branch version is 2.1:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:ppi/skeletonapp.git /path/to/skeletonapp
-    $ cd /path/to/skeletonapp
-    $ git checkout 2.1
-    $ curl -s http://getcomposer.org/installer | php
-    $ php composer.phar install
-    $ mkdir {app/cache,app/logs} && chmod -R 777 {app/cache,app/logs}
+    git clone git@github.com:ppi/skeletonapp.git /path/to/skeletonapp
+    cd /path/to/skeletonapp
+    git checkout 2.1
+    curl -s http://getcomposer.org/installer | php
+    php composer.phar install
+    mkdir {app/cache,app/logs} && chmod -R 777 {app/cache,app/logs}
 
 System requirements
 -------------------
@@ -156,7 +156,6 @@ Nginx Virtual Host
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_param HTTPS off;
         }
-        
     }
 
 
