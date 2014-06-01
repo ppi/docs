@@ -105,28 +105,6 @@ testing the application in your laptop to when you deploy it to a production ser
 messages won't be logged, your application won't stop due to non-fatal PHP errors and we'll use caching wherever
 possible. In *development* you'll get everything!
 
-Switching between environments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To switch between the *development* (``dev``) and *production* (``prod``) environments simply set the
-``PPI\App(array $options)`` parameters in your front controller:
-
-.. code-block:: php
-
-    // file: public/index.php
-
-    // Development
-    $app = new PPI\App(array(
-        'environment'   => 'dev',
-        'debug'         => true
-    ));
-
-    // Production
-    $app = new PPI\App(array(
-        'environment'   => 'prod',
-        'debug'         => false
-    ));
-
 Auto-set the environment using web server variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
