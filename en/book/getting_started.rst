@@ -110,8 +110,7 @@ Web Server Configuration
 
 We take **security** seriously, as a result all your app code and configuration is kept hidden away outside of ``/public/``
 and is inaccessible via the browser. Therefore we need to create a virtual host in order to route all web requests
-to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally. The ``.htaccess`` or web server's rewrite rules
- kick in which route all non-asset files to ``/public/index.php``.
+to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally. The ``.htaccess`` or web server's rewrite rules kick in which route all non-asset files to ``/public/index.php``.
 
 Apache Virtual Host
 ~~~~~~~~~~~~~~~~~~~
@@ -139,7 +138,7 @@ We are now creating an Apache virtual host for the application to make http://sk
 Nginx Virtual Host
 ~~~~~~~~~~~~~~~~~~~
 
-.. code-block::nginx 
+.. code-block:: nginx 
 
     server {
         listen 80;
