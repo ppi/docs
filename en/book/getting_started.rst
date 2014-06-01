@@ -22,9 +22,14 @@ Alternatively you can clone the repo. Notice the branch version is 2.1:
 System requirements
 -------------------
 
-PPI needs **PHP 5.3.3** or above and a web server with its rewrite module enabled (``mod_rewrite`` for Apache).
+PPI needs **PHP 5.3.10** or above and a web server with its rewrite module enabled (``mod_rewrite`` for Apache).
 
-To easily check if your system passes all requirements, PPI provides the **app/check** script, that can be run from the command line:
+To easily check if your system passes all requirements, PPI provides two ways and we recommend you do both.
+
+First method is the **app/check** script, that can be run from the command line
+Second method is the web based **check.php** script that's accessible via: http://skeletonapp.ppi.localhost/check.php
+
+Why do we have both scripts? Because your CLI environment can have a separate **php.ini** file from your web environment so this will ensure you're good to go from both sides.
 
 .. code-block:: bash
 
