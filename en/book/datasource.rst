@@ -1,3 +1,7 @@
+.. index::
+   single: Templating
+
+
 Databases
 =========
 
