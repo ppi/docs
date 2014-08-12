@@ -12,12 +12,12 @@ When you're developing an app, it is 100% sure you'll need to persist and read i
     We suggest to use our DataSource component which is a wrapper around the Doctrine DBAL component. This provides you with a simple yet very powerful database layer to talk to any PDO supported database engine. If you prefer to work with another database component then you can simply create that as a service and inject that into your storage classes instead of the 'datasource' component.
 
 A Simple Example: A User
-------------------------
+========================
 
 The easiest way to understand how the DataSource component works is to see it in action. In this section, you'll configure your database, create a **Product** storage class, persist it to the datbabase and fetch it back out.
 
 Configuring the Database
-~~~~~~~~~~~~~~~~~~~~~~~~
+========================
 
 Before you begin, you'll need to configure your database connection information. By convention, this information is usually configured in the app/datasource.config.php file:
 
@@ -42,7 +42,7 @@ Before you begin, you'll need to configure your database connection information.
     Note: You can have multiple connections within your app. That means you may need to have multiple db engines, like MySQL, PGSQL, MSSQL, or any other PDO driver.
 
 Creating the Storage Class
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+==========================
 
 After configuring the database connection information, we need to have a storage class, which is the one that's going to be talking to the DataSource component when there's a need to persist information.
 
@@ -182,7 +182,7 @@ As you can see, the storage class is pretty explanatory by itself, you have a se
     Doctrine 2.1 ships with a powerful query builder for the SQL language. This QueryBuilder object has methods to add parts to an SQL statement. If you built the complete state you can execute it using the connection it was generated from. The API is roughly the same as that of the DQL Query Builder. For more information please refer to http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
 
 Entities
-~~~~~~~~
+========
 
 The previous function returns an object called UserEntity, you may be wondering, what is thaat, right? well, an Entity is just an object representing a record in a table. Now, let's see how does an Entity class looks like:
 
