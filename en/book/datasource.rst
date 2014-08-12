@@ -1,5 +1,5 @@
 .. index::
-   single: Templating
+   single: DataSource
 
 
 Databases
