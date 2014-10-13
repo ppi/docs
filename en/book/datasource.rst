@@ -14,7 +14,7 @@ When you're developing an app, it is 100% sure you'll need to persist and read i
 A Simple Example: A User
 ========================
 
-The easiest way to understand how the DataSource component works is to see it in action. In this section, you'll configure your database, create a **Product** storage class, persist it to the datbabase and fetch it back out.
+The easiest way to understand how the DataSource component works is to see it in action. In this section, you'll configure your database, create a **Product** storage class, persist it to the database and fetch it back out.
 
 Configuring the Database
 ========================
