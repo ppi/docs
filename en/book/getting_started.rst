@@ -37,4 +37,4 @@ System requirements
 
 A web server with its rewrite module enabled. (mod_rewrite for apache)
 
-PPI needs **5.3.3** or above. The recommended version by symfony is **5.3.10** or above.
+PPI needs **5.3.23** or above as required by zend framework 2.
