@@ -170,5 +170,9 @@ Restart your web server. The skeletonapp website can now be accessed using http:
 
 ----
 
+<<<<<<< HEAD
 Now that your environment is properly set up move to the :doc:`/book/application` section to see an overview of the
 directory structure and learn the basics on how to configure the framework.
+=======
+PPI needs **5.3.23** or above as required by zend framework 2.
+>>>>>>> update php minimal version to 5.3.23
