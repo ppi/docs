@@ -184,7 +184,7 @@ As you can see, the storage class is pretty explanatory by itself, you have a se
 Entities
 ========
 
-The previous function returns an object called UserEntity, you may be wondering, what is thaat, right? well, an Entity is just an object representing a record in a table. Now, let's see how does an Entity class looks like:
+The previous function returns an object called UserEntity, you may be wondering, what is that, right? well, an Entity is just an object representing a record in a table. Now, let's see how does an Entity class looks like:
 
 .. code-block:: php
 
@@ -301,7 +301,7 @@ In the previous section we saw how to fetch information from the database, now, 
         {
 
             // Assuming we're getting the info
-            // from a submited form through POST
+            // from a submitted form through POST
             $post     = $this->post();
 
             // Instantiate the storage service
