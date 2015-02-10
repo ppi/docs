@@ -81,7 +81,7 @@ This example optionally looks for the ``{pageNum}`` parameter, if it's not found
 Routes with requirements
 ------------------------
 
-Only form submits using ``POST`` will trigger this route. This means you dont have to check this kind of stuff in your controller.
+Only form submits using ``POST`` will trigger this route. This means you don't have to check this kind of stuff in your controller.
 
 .. code-block:: yaml
 
