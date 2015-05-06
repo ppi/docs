@@ -9,7 +9,7 @@ What is a Service?
 
 Let's put it simple, a Service is any PHP object that performs some sort of "global" task. It's a generic name used in computer science to describe an object that's created for a specific purpose (e.g. an API Handler). Each service is used throughout your application whenever you need the specific functionality it provides. You don't have to do anything special to make a service; simply write a PHP class with some code that accomplishes a specific task.
 
-.. citations::
+.. note::
     As a rule, a PHP object is a service if it is used globally in your application. A single Mailer service is used globally to send email messages whereas the many Message objects that it delivers are not services. Similarly, a Product object is not a service, but an object that persists Product objects to a database is a service.
 
 Why using Services?

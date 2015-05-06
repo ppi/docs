@@ -8,7 +8,7 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 .clearfix {
-  *zoom: 1;
+    *zoom: 1;
 }
 .clearfix:before,
 .clearfix:after {
@@ -5705,7 +5705,7 @@ button.close {
  *
  */
 body {
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     height: 100%;
     background: url(../images/bg.png);
     font-size: 14px;
@@ -5718,21 +5718,6 @@ body {
     font-family: '';
     src: url('fonts/Museo_Slab_500.ttf') format('truetype');
 }
-
-/* Font Face */
-@font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Droid Sans'), local('DroidSans'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
-}
-@font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/EFpQQyG9GqCrobXxL-KRMXbFhgvWbfSbdVg11QabG8w.woff) format('woff');
-}
-
 
 @font-face {
     font-family: "Museo_Slab_500";
@@ -5774,7 +5759,7 @@ body a {
 }
 
 button, a, p {
- font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+ font-family: Ubuntu, Arial, "libra sans", sans-serif;
 }
 
 #wrapper {
@@ -5837,7 +5822,7 @@ button, a, p {
     text-shadow: none;
     height: 30px;
     color: white;
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
 }
 
 #header .dropdown-menu li a:hover {
@@ -6061,15 +6046,6 @@ and (max-device-width : 480px) {
  * PPI docs.css
  *
  */
-
-/* Font Face */
-@font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Droid Sans'), local('DroidSans'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
-}
-
 #docspage-content {
     width: 90%;
     position: absolute;
@@ -6088,7 +6064,7 @@ and (max-device-width : 480px) {
 }
 
 p, .docs-page p {
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     font-size: 1.1em;
     font-weight: normal;
 }
@@ -6126,12 +6102,12 @@ div.toc-mobile {
 .toc-mobile .heading {
     color: white;
     font-size: 1.5em;
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     margin-bottom: 5px;
 }
 .toc-mobile .items li a {
     color: white;
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
 }
 
 .toc-mobile .items li {
@@ -6169,7 +6145,7 @@ div.toc-mobile {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     font-weight: normal;
     background-color: #E1EDED;
 }
@@ -6250,12 +6226,12 @@ h2, p.section-title {
     color: #244D4D;
     padding: 5px 5px 5px 20px;
     margin-top: 12px;
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     margin-top:10px;
 }
 
 .docs-page ul li {
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
 }
 
 .toc-container {
@@ -6322,7 +6298,7 @@ h1, .section-subbar .main-title {
      background-color: #E1EDED;
      border-bottom: 1px solid #909090;
 
-    font-family: 'Droid Sans', "Lucida Grande", "Lucida Sans Unicode", Lucida, Arial, Helvetica, sans-serif;
+    font-family: Ubuntu, Arial, "libra sans", sans-serif;
     padding: 0;
     font-size: 1.8em;
     min-width: 300px;

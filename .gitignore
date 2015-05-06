@@ -1,3 +1,6 @@
 .idea
-_build
 *~
+*.kate-swp
+*.pyc
+_build
+vendor/

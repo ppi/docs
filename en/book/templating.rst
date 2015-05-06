@@ -19,7 +19,7 @@ Base Templates
 
 **What are base templates?**
 
-Why do we need base templates? well you don't want to have to repeat HTML over and over again and perform repetative steps for every different type of page you have. There's usually some commonalities between the templates and this commonality is your base template. The part that's usually different is the content page of your webpage, such as a users profile or a blog post.
+Why do we need base templates? well you don't want to have to repeat HTML over and over again and perform repetitive steps for every different type of page you have. There's usually some commonalities between the templates and this commonality is your base template. The part that's usually different is the content page of your webpage, such as a users profile or a blog post.
 
 So lets see an example of what we call a base template, or somethings referred to as a master template. This is all the HTML structure of your webpage including headers and footers, and the part that'll change will be everything inside the page-content section.
 
@@ -232,7 +232,7 @@ Review this example it shows a few examples of using the slots helper for variou
 
 **What's going on?**
 
-By asking for ``images/blog.png`` we're basically asking for ``www.mysite.com/images/blog.png``, pretty straight forward right? Our ``include_css`` and ``include_js`` slots blocks are custom HTML that's loading up CSS/JS files just for this paritcular page load. This is great because you can split your application up onto smaller CSS/JS files and only load the required assets for your particular page, rather than having to bundle all your CSS into the one file.
+By asking for ``images/blog.png`` we're basically asking for ``www.mysite.com/images/blog.png``, pretty straight forward right? Our ``include_css`` and ``include_js`` slots blocks are custom HTML that's loading up CSS/JS files just for this particular page load. This is great because you can split your application up onto smaller CSS/JS files and only load the required assets for your particular page, rather than having to bundle all your CSS into the one file.
 
 Using the router helper
 -----------------------

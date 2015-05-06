@@ -1,6 +1,8 @@
 .. index::
    single: Modules
 
+.. _`modules`:
+
 Modules
 =======
 
@@ -41,19 +43,29 @@ Every PPI module looks for a ``Module.php`` class file, this is the starting poi
 .. code-block:: php
 
     <?php
+
     namespace Application;
 
-    use PPI\Module\Module as BaseModule
     use PPI\Autoload;
+    use PPI\Module\AbstractModule;
 
-    class Module extends BaseModule {
-
-        protected $_moduleName = 'Application';
-
-        function init($e) {
+    class Module extends AbstractModule
+    {
+        public function init($e)
+        {
             Autoload::add(__NAMESPACE__, dirname(__DIR__));
         }
 
+        /**
+         * Returns the module name. Defaults to the module namespace stripped
+         * of backslashes.
+         *
+         * @return string
+         */
+        public function getName()
+        {
+            return 'Application';
+        }
     }
 
 Init
@@ -71,55 +83,115 @@ Your modules resources
 Configuration
 -------------
 
-Expanding on from the previous code example, we're now adding a ``getConfig()`` method. This must return a raw php array. All the modules with getConfig() defined on them will be merged together to create 'modules config' and this is merged with your global app's configuration file at ``/app/app.config.php``. Now from any controller you can get access to this config by doing ``$this->getConfig()``. More examples on this later in the Controllers section.
+Expanding on from the previous code example, we're now adding a ``getConfig()`` method. This must return a raw PHP array. You may ``require/include`` a PHP file directly or use the ``loadConfig()`` helper that works for both PHP and YAML files. When using ``loadConfig()`` you don't need to tell the full path, just the filename.
+
+All the modules with getConfig()defined on them will be merged together to create 'modules config' and this is merged with your global app's configuration file at ``/app/app.config.php``. Now from any controller you can get access to this config by doing ``$this->getConfig()``. More examples on this later in the Controllers section.
 
 .. code-block:: php
 
     <?php
-    class Module extends BaseModule {
 
-    protected $_moduleName = 'Application';
-
-        public function init($e) {
+    class Module extends AbstractModule 
+    {
+        public function init($e)
+        {
             Autoload::add(__NAMESPACE__, dirname(__DIR__));
         }
 
-        public function getConfig() {
-            return include(__DIR__ . '/resources/config/config.php');
+        /**
+         * Returns the module name. Defaults to the module namespace stripped
+         * of backslashes.
+         *
+         * @return string
+         */
+        public function getName()
+        {
+            return 'Application';
         }
 
+        /**
+         * Returns configuration to merge with application configuration.
+         *
+         * @return array
+         */
+        public function getConfig()
+        {
+            return require __DIR__ . '/resources/config/config.php';
+            //
+            // or:
+            // return $this->loadConfig('config.yml');
+            //
+            // or, for multiple files:
+            // return $this->mergeConfig('config.php', 'other.yml');
+        }
     }
+
+.. tip::
+    To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command::
+
+        $ app/console config:dump
+        framework:
+            templating:
+                engines:
+                    - php
+                    - smarty
+                    - twig
+            skeleton_module:
+                path: ./utils/skeleton_module
+         
+        ...
+
 
 Routing
 -------
 
-The getRoutes() method currently is re-using the Symfony2 routing component. It needs to return a Symfony RouteCollection instance. This means you can setup your routes using PHP, YAML or XML.
+The getRoutes()method currently is re-using the Symfony2 routing component. It needs to return a Symfony RouteCollection instance. This means you can setup your routes using PHP or YAML.
 
 .. code-block:: php
 
-    class Module extends BaseModule {
+    <?php
 
-        protected $_moduleName = 'Application';
-
-        public function init($e) {
+    class Module extends AbstractModule 
+    {
+        public function init($e)
+        {
             Autoload::add(__NAMESPACE__, dirname(__DIR__));
         }
 
         /**
-        * Get the configuration for this module
-        *
-        * @return array
-        */
-        public function getConfig() {
-            return include(__DIR__ . '/resources/config/config.php');
+         * Returns the module name. Defaults to the module namespace stripped
+         * of backslashes.
+         *
+         * @return string
+         */
+        public function getName()
+        {
+            return 'Application';
         }
 
         /**
-        * Get the routes for this module, in YAML format.
-        *
-        * @return \Symfony\Component\Routing\RouteCollection
-        */
-        public function getRoutes() {
+         * Returns configuration to merge with application configuration.
+         *
+         * @return array
+         */
+        public function getConfig()
+        {
+            return require __DIR__ . '/resources/config/config.php';
+            //
+            // or:
+            // return $this->loadConfig('config.yml');
+            //
+            // or, for multiple files:
+            // return $this->mergeConfig('config.php', 'other.yml');
+        }
+
+        /**
+         * Get the routes for this module, in YAML format.
+         *
+         * @return \Symfony\Component\Routing\RouteCollection
+         */
+        public function getRoutes()
+        {
             return $this->loadYamlRoutes(__DIR__ . '/resources/config/routes.yml');
         }
 

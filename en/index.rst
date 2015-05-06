@@ -1,5 +1,5 @@
 PPI Framework
-============================
+=============
 
 `PPI`_ is an open source `PHP`_ meta-framework.
 
@@ -15,10 +15,20 @@ In 7 short chapters (or less!) learn how to use PPI2 for your web projects.
 
     book/index
 
+.. include:: /book/map.rst.inc
+
+Configuration Reference
+-----------------------
+
+.. toctree::
+    :hidden:
+
+    reference/index
+
+.. include:: /reference/map.rst.inc
+
 .. _`PPI`: http://ppi.io/
 .. _`PHP`: http://php.net/
 .. _`Symfony2`: http://symfony.com/
 .. _`ZendFramework2`: http://framework.zend.com/
 .. _`Doctrine2`: http://www.doctrine-project.org/
-
-.. include:: /book/map.rst.inc
