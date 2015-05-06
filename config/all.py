@@ -7,6 +7,7 @@ sys.path.append(os.path.abspath('../_exts'))
 
 # adding PhpLexer
 from sphinx.highlighting import lexers
+from pygments.lexers.compiled import CLexer
 from pygments.lexers.web import PhpLexer
 
 # -- General configuration -----------------------------------------------------
@@ -21,6 +22,7 @@ extensions = ['sphinx.ext.todo','sphinx.ext.autosummary','sensio.sphinx.refinclu
 # enable highlighting for PHP code not between ``<?php ... ?>`` by default
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
+lexers['php-standalone'] = PhpLexer(startinline=True)
 
 # use PHP as the primary domain
 primary_domain = 'php'
@@ -42,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PPI Framework'
-copyright = u'2011-2013, Paul Dragoonis. All rights reserved'
+copyright = u'2011-2015, Paul Dragoonis. All rights reserved'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
