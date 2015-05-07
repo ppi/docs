@@ -1,3 +1,5 @@
+* :doc:`/book/installation`
+* :doc:`/book/requirements`
 * :doc:`/book/getting_started`
 * :doc:`/book/application`
 * :doc:`/book/modules`
@@ -5,3 +7,4 @@
 * :doc:`/book/controllers`
 * :doc:`/book/templating`
 * :doc:`/book/services`
+* :doc:`/book/datasource`

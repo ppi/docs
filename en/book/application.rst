@@ -1,8 +1,6 @@
 .. index::
    single: Skeleton Application
 
-.. _`skeleton-application`:
-
 Skeleton Application
 ====================
 

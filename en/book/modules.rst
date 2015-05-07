@@ -1,7 +1,6 @@
+
 .. index::
    single: Modules
-
-.. _`modules`:
 
 Modules
 =======

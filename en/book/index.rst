@@ -2,7 +2,7 @@ The Book
 ========
 
 .. toctree::
-    :hidden:
+    :titlesonly:
 
     getting_started
     application
@@ -11,5 +11,4 @@ The Book
     controllers
     templating
     services
-
-.. include:: /book/map.rst.inc
+    datasource
