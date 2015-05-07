@@ -1,4 +1,4 @@
-.wy-side-nav-search {
+.wy-side-nav-search, .wy-nav-top {
     background-color: #406C6C;
 }
 
@@ -9,3 +9,4 @@
 .rst-content a:visited {
     color: #274c4c;
 }
+
