@@ -1,5 +1,6 @@
 * :doc:`/book/installation`
 * :doc:`/book/requirements`
+* :doc:`/book/configuration`
 * :doc:`/book/getting_started`
 * :doc:`/book/application`
 * :doc:`/book/modules`
