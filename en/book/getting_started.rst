@@ -4,25 +4,27 @@
 Getting Started
 ===============
 
-Downloading PPI
----------------
+Install Composer on Linux or OSX
+--------------------------------
 
-You can download the PPI skeletonaapp from the `PPI Homepage <http://www.ppi.io/>`_. If you just want everything in one folder ready to go, you should choose the **"ppi skeletonapp with vendors"** option.
-Alternatively you can clone the repo. Notice the branch version is 2.1:
 
 .. code-block:: bash
 
-    git clone git@github.com:ppi/skeletonapp.git /path/to/skeletonapp
-    cd /path/to/skeletonapp
-    git checkout 2.1
-    curl -s http://getcomposer.org/installer | php
-    php composer.phar install
-    mkdir {app/cache,app/logs} && chmod -R 777 {app/cache,app/logs}
+    curl -sS https://getcomposer.org/installer | php
+    $ sudo mv composer.phar /usr/local/bin/composer
 
-System requirements
--------------------
+Install composer on Windows
+---------------------------
 
-PPI needs **PHP 5.3.10** or above and a web server with its rewrite module enabled (``mod_rewrite`` for Apache).
+Download the installer from getcomposer.org/download, execute it and follow the instructions.
+
+
+Install PPI skeleton using composer
+-----------------------------------
+
+.. code-block:: bash
+
+    composer create-project -sdev ppi/skeleton-app /my/skeleton/path
 
 To easily check if your system passes all requirements, PPI provides two ways and we recommend you do both.
 
@@ -170,9 +172,5 @@ Restart your web server. The skeletonapp website can now be accessed using http:
 
 ----
 
-<<<<<<< HEAD
 Now that your environment is properly set up move to the :doc:`/book/application` section to see an overview of the
 directory structure and learn the basics on how to configure the framework.
-=======
-PPI needs **5.3.23** or above as required by zend framework 2.
->>>>>>> update php minimal version to 5.3.23

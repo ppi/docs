@@ -3,7 +3,9 @@ PPI Framework
 
 `PPI`_ is an open source `PHP`_ meta-framework.
 
-We have taken the good bits from `Symfony2`_, `ZendFramework2`_ & `Doctrine2`_ and combined them together to create a solid and very easy web application framework. PPI can be considered the boilerplate of PHP frameworks.
+PPI is the PHP Interoperability Framework. It provides an equal and open platform to empower PHP developers to pick the best tools from the best PHP frameworks.
+
+PPI bootstraps framework components for you from the top frameworks such as `ZendFramework2`_,  `Symfony2`_, `Laravel4`_, `Doctrine2`_
 
 The Book
 --------
@@ -30,5 +32,6 @@ Configuration Reference
 .. _`PPI`: http://ppi.io/
 .. _`PHP`: http://php.net/
 .. _`Symfony2`: http://symfony.com/
+.. _`Laravel4`: http://laravel.com/
 .. _`ZendFramework2`: http://framework.zend.com/
 .. _`Doctrine2`: http://www.doctrine-project.org/
