@@ -3,14 +3,14 @@ Requirements
 
 To easily check if your system passes all requirements, PPI provides two ways and we recommend you do both.
 
-* First method is the **app/check** script, that can be run from the command line.
-* Second method is the web based **check.php** script that's accessible via: http://skeletonapp.ppi/check.php
-
 Why do we have both scripts? Because your CLI environment can have a separate **php.ini** file from your web environment so this will ensure you're good to go from both sides.
+
+Requirements checking on the command-line
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-    $ php app/check
+    $ ./app/check
                            _
             _____   _____ |_|
            / __  | / __ | / |
@@ -47,16 +47,23 @@ Watch out for the green ``OK`` markers. If they all light up, congratulations, y
 
 Below is the list of required and optional requirements.
 
-Required
-~~~~~~~~
+
+Requirements checking in the browser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The check.php script is accessible in your browser at: http://skeletonapp.ppi/check.php
+
+
+Must have requirements
+~~~~~~~~~~~~~~~~~~~~~~
 
 * PHP needs to be a minimum version of PHP 5.3.3
 * JSON needs to be enabled
 * ctype needs to be enabled
 * Your PHP.ini needs to have the date.timezone setting
 
-Optional
-~~~~~~~~
+Optional requirements
+~~~~~~~~~~~~~~~~~~~~~
 
 * You need to have the PHP-XML module installed
 * You need to have at least version 2.6.21 of libxml
