@@ -2,5 +2,4 @@
 *~
 *.kate-swp
 *.pyc
-_build
-vendor/
+build

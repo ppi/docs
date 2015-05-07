@@ -1,8 +1,13 @@
-<!DOCTYPE html>
 
-{%- set render_sidebar = (not embedded) and (not theme_nosidebar|tobool) and (sidebars != []) %}
+{%- block doctype -%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{%- endblock %}
+{%- set reldelim1 = reldelim1 is not defined and ' &raquo;' or reldelim1 %}
+{%- set reldelim2 = reldelim2 is not defined and ' |' or reldelim2 %}
 {%- set url_root = pathto('', 1) %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
+
 
 {%- macro relbar(bottom=False) %}
     <div class="related{% if bottom %} related-bottom{% endif %} nav-collapse">
