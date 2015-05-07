@@ -3,7 +3,7 @@ Databases
 
 When you're developing an app, it is 100% sure you'll need to persist and read information to and from a database. Fortunately, PPI makes it simple to work with databases with our powerful DataSources component, which makes use of Doctrine DBAL layer, a library whose sole goal is to give you robust tools to make this easy. In this chapter, you'll learn the basic philosophy behind doctrine and see how easy is to use the DataSource component to work with databases.
 
-.. citations::
+.. note::
 
     We suggest to use our DataSource component which is a wrapper around the Doctrine DBAL component. This provides you with a simple yet very powerful database layer to talk to any PDO supported database engine. If you prefer to work with another database component then you can simply create that as a service and inject that into your storage classes instead of the 'datasource' component.
 
@@ -33,7 +33,7 @@ Before you begin, you'll need to configure your database connection information.
 
     return $connections; // Very important you must return the connections variable from this script
 
-.. citations::
+.. note::
 
     Note: You can have multiple connections within your app. That means you may need to have multiple db engines, like MySQL, PGSQL, MSSQL, or any other PDO driver.
 
@@ -174,7 +174,7 @@ As you can see, the storage class is pretty explanatory by itself, you have a se
 
     }
 
-.. citations::
+.. note::
     Doctrine 2.1 ships with a powerful query builder for the SQL language. This QueryBuilder object has methods to add parts to an SQL statement. If you built the complete state you can execute it using the connection it was generated from. The API is roughly the same as that of the DQL Query Builder. For more information please refer to http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html
 
 Entities
@@ -245,7 +245,7 @@ The previous function returns an object called UserEntity, you may be wondering,
     }
 
 Fetching Data
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 We have covered so far the Storage and Entities classes, now let's see how it actually works, for that, let's put a sample code:
 
