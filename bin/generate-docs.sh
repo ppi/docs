@@ -3,5 +3,5 @@ EXECPATH=`dirname $0`
 cd $EXECPATH
 cd ..
 
-rm build -Rf
+rm -rf build
 sphinx-build en build
