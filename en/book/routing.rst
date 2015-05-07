@@ -50,12 +50,12 @@ Basic Routes
 .. code-block:: yaml
 
     Homepage:
-    pattern: /
-    defaults: { _controller: "Application:Index:index"}
+        pattern: /
+        defaults: { _controller: "Application:Index:index"}
 
     Blog_Index:
-    pattern: /blog
-    defaults: { _controller: "Application:Blog:index"}
+        pattern: /blog
+        defaults: { _controller: "Application:Blog:index"}
 
 
 Routes with parameters
@@ -66,8 +66,8 @@ The following example is basically ``/blog/*`` where the wildcard is the value g
 .. code-block:: yaml
 
     Blog_Show:
-    pattern: /blog/{title}
-    defaults: { _controller: "Application:Blog:show"}
+        pattern: /blog/{title}
+        defaults: { _controller: "Application:Blog:show"}
 
 
 This example optionally looks for the ``{pageNum}`` parameter, if it's not found it defaults to ``1``.
@@ -75,8 +75,8 @@ This example optionally looks for the ``{pageNum}`` parameter, if it's not found
 .. code-block:: yaml
 
     Blog_Show:
-    pattern: /blog/{pageNum}
-    defaults: { _controller: "Application:Blog:index", pageNum: 1}
+        pattern: /blog/{pageNum}
+        defaults: { _controller: "Application:Blog:index", pageNum: 1}
 
 
 Routes with requirements
@@ -87,10 +87,10 @@ Only form submits using ``POST`` will trigger this route. This means you don't h
 .. code-block:: yaml
 
     Blog_EditSave:
-    pattern: /blog/edit/{id}
-    defaults: { _controller: "Application:Blog:edit"}
-    requirements:
-        _method: POST
+        pattern: /blog/edit/{id}
+        defaults: { _controller: "Application:Blog:edit"}
+        requirements:
+            _method: POST
 
 
 Checking if the ``{pageNum}`` parameter is numerical. Checking if the ``{lang}`` parameter is ``en`` or ``de``.
@@ -98,11 +98,11 @@ Checking if the ``{pageNum}`` parameter is numerical. Checking if the ``{lang}``
 .. code-block:: yaml
 
     Blog_Show:
-    pattern: /blog/{lang}/{pageNum}
-    defaults: { _controller: "Application:Blog:index", pageNum: 1, lang: en}
-    requirements:
-        id: \d+
-        lang: en|de
+        pattern: /blog/{lang}/{pageNum}
+        defaults: { _controller: "Application:Blog:index", pageNum: 1, lang: en}
+        requirements:
+            id: \d+
+            lang: en|de
 
 
 Checking if the page is a ``POST`` request, and that ``{id}`` is numerical.
@@ -110,8 +110,8 @@ Checking if the page is a ``POST`` request, and that ``{id}`` is numerical.
 .. code-block:: yaml
 
     Blog_EditSave:
-    pattern: /blog/edit/{id}
-    defaults: { _controller: "Application:Blog:edit"}
-    requirements:
-        _method: POST
-        id: \d+
+        pattern: /blog/edit/{id}
+        defaults: { _controller: "Application:Blog:edit"}
+        requirements:
+            _method: POST
+            id: \d+
