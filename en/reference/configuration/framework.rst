@@ -227,7 +227,7 @@ assets_version_format
 
 **type**: ``string`` **default**: ``%%s?%%s``
 
-This specifies a :phpfunction:`sprintf` pattern that will be used with the `assets_version`_
+This specifies a `sprintf` pattern that will be used with the `assets_version`_
 option to construct an asset's path. By default, the pattern adds the asset's
 version as a query string. For example, if ``assets_version_format`` is set to
 ``%%s?version=%%s`` and ``assets_version`` is set to ``5``, the asset's path
