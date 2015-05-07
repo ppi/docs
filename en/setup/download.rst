@@ -1,5 +1,5 @@
-Download
-========
+Download PPI
+============
 
 Download Composer on Linux or OSX
 ---------------------------------

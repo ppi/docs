@@ -1,8 +1,41 @@
-Install
-=======
+Installing the environment
+==========================
 
 Automatic Vagrant Installation
 ------------------------------
+
+The recommended install procedure is to use the pre-built vagrant image that ships with the skeleton app in the ``ansible`` directory.
+
+Installing vagrant and ansible
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Before you can run vagrant you'll need to install a few system dependencies.
+
+.. code-block:: bash
+
+    # osx
+    brew install vagrant ansible
+    # linux (ubuntu)
+    sudo apt-get install vagrant ansible
+    # linux (centos)
+    sudo yum install vagrant ansible
+
+
+Running vagrant
+~~~~~~~~~~~~~~~
+
+Running the vagrant image - it's that easy!
+
+.. code-block:: bash
+
+    vagrant up
+
+
+Accessing the vagrant setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now you can now browse to your ppi application at http://192.168.33.99
+
 
 Manual Web Server Configuration
 -------------------------------
