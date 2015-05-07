@@ -1,8 +1,11 @@
-Configuration
-=============
+Install
+=======
 
-Web Server Configuration
-------------------------
+Automatic Vagrant Installation
+------------------------------
+
+Manual Web Server Configuration
+-------------------------------
 
 Security is crucial to consider. As a result all your app code and configuration is kept hidden away outside of ``/public/``
 and is inaccessible via the browser. Therefore we need to create a virtual host in order to route all web requests
