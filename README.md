@@ -22,7 +22,7 @@ To build the documentation you'll need Python and Sphinx installed.
 $ apt-get install python2.7
 $ easy_install sphinx
 $ cd /path/to/ppi-docs
-$ make html
+$ ./bin/generate-docs.sh
 ```
 
 Contributing
