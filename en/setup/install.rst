@@ -14,11 +14,11 @@ Before you can run vagrant you'll need to install a few system dependencies.
 .. code-block:: bash
 
     # osx
-    brew install vagrant ansible
+    brew install vagrant ansible node
     # linux (ubuntu)
-    sudo apt-get install vagrant ansible
+    sudo apt-get install vagrant ansible node
     # linux (centos)
-    sudo yum install vagrant ansible
+    sudo yum install vagrant ansible node
 
 
 Running vagrant
@@ -69,7 +69,6 @@ We are now creating an Apache virtual host for the application to make http://sk
             Allow from all
             DirectoryIndex index.php
             Options Indexes FollowSymLinks
-
 
             RewriteEngine On
             RewriteCond %{REQUEST_FILENAME} !-d
