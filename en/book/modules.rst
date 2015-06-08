@@ -8,7 +8,7 @@ Modules
 By default, one module is provided with the SkeletonApp, named **Application**. It provides a simple route pointing to the homepage. A simple controller to handle the "home" page of the application. This demonstrates using routes, controllers and views within your module.
 
 Module Structure
------------------
+----------------
 
 Your module starts with Module.php. You can have configuration on your module. Your can have routes which result in controllers getting dispatched. Your controllers can render view templates.
 
@@ -84,7 +84,7 @@ Configuration
 
 Expanding on from the previous code example, we're now adding a ``getConfig()`` method. This must return a raw PHP array. You may ``require/include`` a PHP file directly or use the ``loadConfig()`` helper that works for both PHP and YAML files. When using ``loadConfig()`` you don't need to tell the full path, just the filename.
 
-All the modules with getConfig()defined on them will be merged together to create 'modules config' and this is merged with your global app's configuration file at ``/app/app.config.php``. Now from any controller you can get access to this config by doing ``$this->getConfig()``. More examples on this later in the Controllers section.
+All the modules with getConfig() defined on them will be merged together to create 'modules config' and this is merged with your global app's configuration file at ``/app/app.config.php``. Now from any controller you can get access to this config by doing ``$this->getConfig()``. More examples on this later in the Controllers section.
 
 .. code-block:: php
 
@@ -115,92 +115,21 @@ All the modules with getConfig()defined on them will be merged together to creat
          */
         public function getConfig()
         {
-            return require __DIR__ . '/resources/config/config.php';
-            //
-            // or:
-            // return $this->loadConfig('config.yml');
-            //
-            // or, for multiple files:
-            // return $this->mergeConfig('config.php', 'other.yml');
+            return $this->loadConfig(__DIR__ . '/resources/config/config.yml');
         }
     }
 
 .. tip::
-    To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command::
-
-        $ app/console config:dump
-        framework:
-            templating:
-                engines:
-                    - php
-                    - smarty
-                    - twig
-            skeleton_module:
-                path: ./utils/skeleton_module
-         
-        ...
-
+    To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command
 
 Routing
 -------
 
-The getRoutes()method currently is re-using the Symfony2 routing component. It needs to return a Symfony RouteCollection instance. This means you can setup your routes using PHP or YAML.
-
-.. code-block:: php
-
-    <?php
-
-    class Module extends AbstractModule 
-    {
-        public function init($e)
-        {
-            Autoload::add(__NAMESPACE__, dirname(__DIR__));
-        }
-
-        /**
-         * Returns the module name. Defaults to the module namespace stripped
-         * of backslashes.
-         *
-         * @return string
-         */
-        public function getName()
-        {
-            return 'Application';
-        }
-
-        /**
-         * Returns configuration to merge with application configuration.
-         *
-         * @return array
-         */
-        public function getConfig()
-        {
-            return require __DIR__ . '/resources/config/config.php';
-            //
-            // or:
-            // return $this->loadConfig('config.yml');
-            //
-            // or, for multiple files:
-            // return $this->mergeConfig('config.php', 'other.yml');
-        }
-
-        /**
-         * Get the routes for this module, in YAML format.
-         *
-         * @return \Symfony\Component\Routing\RouteCollection
-         */
-        public function getRoutes()
-        {
-            return $this->loadYamlRoutes(__DIR__ . '/resources/config/routes.yml');
-        }
-
-    }
+The getRoutes() method is how you inform PPI which routing vendor you'd like to use for this single module. More on this in the Routing section
 
 Conclusion
 ----------
 
-So, what have we learnt in this section so far? We learnt how to initialize our module, and how to obtain configuration options and routes from it.
-
-PPI will boot up all the modules and call the ``getRoutes()`` method on them all. It will merge the results together and match them against a request URI such as ``/blog/my-blog-title``. When a matching route is found it dispatches the controller specified in that route.
+So far, we've learnt what methods to initialize our module, return configuration and return routes.
 
 Lets move onto the Routing section to check out what happens next.

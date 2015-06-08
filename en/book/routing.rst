@@ -5,99 +5,58 @@
 Routing
 =======
 
-Routes are the rules that tell the framework what URLs map to what area of your application. The routing here is simple and expressive. We are using the Symfony2 routing component here, this means if you're a Symfony2 developer you already know what you're doing. If you don't know Symfony2 already, then learning the routes here will allow you to read routes from existing Symfony2 bundles out there in the wild. It's really a win/win situation.
+Routes are the rules that tell the framework what URLs map to what actions of your application.
 
-Routes are an integral part of web application development. They make way for nice clean urls such as ``/blog/view/5543`` instead of something like ``/blog.php?Action=view&article=5543``.
+PPI will boot up all the modules and call the ``getRoutes()`` method on them all. The routes returned by each module will be added into a stack and PPI will match each set of routes in the order that your modules are loaded.
 
-By reading this routing section you'll be able to:
 
-* Create beautiful clean routes
-* Create routes that take in different parameters
-* Specify complex requirements for your parameters
-* Generate URLs within your controllers
-* Redirect to routes within your controllers
+Using Symfony Router
+--------------------
 
-The Details
------------
+In your PPI module you can use the powerful symfony router. The router here is 100% like-for-like as it is in the symfony framework itself. We directly re-use the entire symfony component and thus there's no new knowledge to be learned here.
 
-Lets talk about the structure of a route, you have a route name, pattern, defaults and requirements.
+This also means you can take routes from existing symfony code and apply them here and they will work just fine.
 
-Name
-~~~~~
+Loading symfony routes
+~~~~~~~~~~~~~~~~~~~~~~
 
-This is a symbolic name to easily refer to this actual from different contexts in your application. Examples of route names are ``Homepage``, ``Blog_View``, ``Profile_Edit``. These are extremely useful if you want to just redirect a user to a page like the login page, you can redirect them to User_Login. If you are in a template file and want to generate a link you can refer to the route name and it will be created for you. The good part about this is you can maintain the routes via your ``routes.yml`` file and your entire system updates.
+.. code-block:: php
 
-Pattern
-~~~~~~~
+    <?php
+    class Module extends AbstractModule
+    {
+        // ....
+        public function getRoutes()
+        {
+            return $this->loadSymfonyRoutes(__DIR__ . '/routes/symfony.yml');
+        }
+    }
 
-This is the URI pattern that if present will activate your route. In this example we're targeting the homepage. This is where you can specify params like ``{id}`` or ``{username}``. You can make URLs like ``/article/{id}`` or ``/profile/{username}``.
 
-Defaults
-~~~~~~~~
-
-This is the important part, The syntax is ``Module:Controller:action``. So if you specify ``Application:Blog:show`` then this will execute the following class path: ``/modules/Application/Controller/Blog->showAction()``. Notice how the method has a suffix of Action, this is so you can have lots of methods on your controller but only the ones ending in ``Action()`` will be executable from a route.
-
-Requirements
-~~~~~~~~~~~~
-
-This is where you can specify things like the request method being POST or PUT. You can also specify rules for the parameters you created above in the pattern section. Such as ``{id}`` being numeric, or ``{lang}`` being in a whitelist of values such as ``en|de|pt``.
-
-With all this knowledge in mind, take a look at all the different examples of routes below and come back up here for reference.
-
-Basic Routes
-------------
+The yaml routes list
+~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: yaml
-
-    Homepage:
-        pattern: /
-        defaults: { _controller: "Application:Index:index"}
 
     Blog_Index:
-        pattern: /blog
-        defaults: { _controller: "Application:Blog:index"}
+        pattern:  /blog
+        defaults: { _controller: "BlogModule:Blog:index"}
 
+    Blog_Get_Recent_Comments:
+        pattern:  /blog/get_recent_comments
+        defaults: { _controller: "BlogModule:Blog:getRecentComments"}
 
-Routes with parameters
------------------------
-
-The following example is basically ``/blog/*`` where the wildcard is the value given to title. If the URL was ``/blog/using-ppi2`` then the title variable gets the value ``using-ppi2``, which you can see being used in the Example Controller section below.
-
-.. code-block:: yaml
-
-    Blog_Show:
-        pattern: /blog/{title}
-        defaults: { _controller: "Application:Blog:show"}
-
-
-This example optionally looks for the ``{pageNum}`` parameter, if it's not found it defaults to ``1``.
-
-.. code-block:: yaml
-
-    Blog_Show:
-        pattern: /blog/{pageNum}
-        defaults: { _controller: "Application:Blog:index", pageNum: 1}
-
-
-Routes with requirements
-------------------------
-
-Only form submits using ``POST`` will trigger this route. This means you don't have to check this kind of stuff in your controller.
-
-.. code-block:: yaml
+    Blog_Show_Posts:
+        pattern: /blog/posts/{pageNum}
+        defaults: { _controller: "Application:Blog:posts", pageNum: 1}
 
     Blog_EditSave:
-        pattern: /blog/edit/{id}
+        pattern: /blog/create
         defaults: { _controller: "Application:Blog:edit"}
         requirements:
             _method: POST
 
-
-Checking if the ``{pageNum}`` parameter is numerical. Checking if the ``{lang}`` parameter is ``en`` or ``de``.
-
-.. code-block:: yaml
-
-    Blog_Show:
+    Blog_Show_Posts:
         pattern: /blog/{lang}/{pageNum}
         defaults: { _controller: "Application:Blog:index", pageNum: 1, lang: en}
         requirements:
@@ -105,13 +64,55 @@ Checking if the ``{pageNum}`` parameter is numerical. Checking if the ``{lang}``
             lang: en|de
 
 
-Checking if the page is a ``POST`` request, and that ``{id}`` is numerical.
 
-.. code-block:: yaml
+Using Aura Router
+-----------------
 
-    Blog_EditSave:
-        pattern: /blog/edit/{id}
-        defaults: { _controller: "Application:Blog:edit"}
-        requirements:
-            _method: POST
-            id: \d+
+
+
+Loading aura routes
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: php
+
+    <?php
+    class Module extends AbstractModule
+    {
+        // ....
+        public function getRoutes()
+        {
+            return $this->loadAuraRoutes(__DIR__ . '/resources/routes/aura.php');
+        }
+    }
+
+
+The php routes list
+~~~~~~~~~~~~~~~~~~~
+
+Looking at the following definitions, you can specify your controller and action using "Path\To\Controller::action" and it will resolve that way.
+
+Alternatively, you can specify the Module:Controller:action syntax, like in symfony, to resolve your controller and action that way.
+
+.. code-block:: php
+
+    <?php
+    // add a simple named route without params
+    $router->add('Homepage', '/')
+        ->addValues(array(
+            'controller' => 'Application\Controller\Index::indexAction'
+        ));
+
+    // add a named route with an extended specification
+    $router->add('blog.read', '/blog/read/{id}{format}')
+        ->addTokens(array(
+            'id'     => '\d+',
+            'format' => '(\.[^/]+)?',
+        ))
+        ->addValues(array(
+            'controller' => 'Application:Index:index',
+            'format'     => '.html',
+        ));
+
+    // Important to return the router back to PPI, so it can mediate the router over to Aura
+    return $router;
+
