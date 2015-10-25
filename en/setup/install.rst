@@ -34,8 +34,14 @@ Running the vagrant image - it's that easy!
 Accessing the vagrant setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now you can now browse to your ppi application at http://192.168.33.99
+If you wish to use the skeletonapp as a hostname, run this command and browse to `http://skeletonapp.ppi`
 
+.. code-block:: bash
+
+    sudo sh -c 'echo "192.168.33.99 skeletonapp.ppi" >> /etc/hosts’
+
+
+Otherwise you can browse straight to the ip address of: `http://192.168.33.99`
 
 Manual Web Server Configuration
 -------------------------------
