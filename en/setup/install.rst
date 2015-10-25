@@ -31,8 +31,16 @@ Running the vagrant image - it's that easy!
     vagrant up
 
 
-Accessing the vagrant setup
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Manual Web Server Configuration
+-------------------------------
+
+Security is crucial to consider. As a result all your app code and configuration is kept hidden away outside of ``/public/``
+and is inaccessible via the browser. Therefore we need to create a virtual host in order to route all web requests
+to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally. The ``.htaccess`` or web server's rewrite rules kick in which route all non-asset files to ``/public/index.php``.
+
+Accessing the application
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you wish to use the skeletonapp as a hostname, run this command and browse to `http://skeletonapp.ppi`
 
@@ -42,19 +50,6 @@ If you wish to use the skeletonapp as a hostname, run this command and browse to
 
 
 Otherwise you can browse straight to the ip address of: `http://192.168.33.99`
-
-Manual Web Server Configuration
--------------------------------
-
-Security is crucial to consider. As a result all your app code and configuration is kept hidden away outside of ``/public/``
-and is inaccessible via the browser. Therefore we need to create a virtual host in order to route all web requests
-to the ``/public/`` folder and from there your public assets (css/js/images) are loaded normally. The ``.htaccess`` or web server's rewrite rules kick in which route all non-asset files to ``/public/index.php``.
-
-Updating your hosts file
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-You will need to update the ``/etc/hosts`` or ``c:\windows\system32\drivers\etc\hosts`` file so that your system knows
-how to resolve ``skeletonapp.ppi``.
 
 Apache Configuration
 ~~~~~~~~~~~~~~~~~~~~
