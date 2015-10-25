@@ -30,6 +30,7 @@ To let our PPI app to know about the service, we need to declare it in our Modul
 
 .. code-block:: php
 
+    <?php
     namespace ModuleName;
 
     use PPI\Module\Module as BaseModule;
@@ -69,6 +70,7 @@ To use the services in our Controllers, we just need to call the function ->getS
 
 .. code-block:: php
 
+    <?php
     public function getVenuesAction()
     {
 
