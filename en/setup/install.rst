@@ -11,15 +11,9 @@ Installing vagrant and ansible
 
 Before you can run vagrant you'll need to install a few system dependencies.
 
-.. code-block:: bash
+Install vagrant https://docs.vagrantup.com/v2/installation/
 
-    # osx
-    brew install vagrant ansible node
-    # linux (ubuntu)
-    sudo apt-get install vagrant ansible node
-    # linux (centos)
-    sudo yum install vagrant ansible node
-
+Install ansible: http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-pip
 
 Running vagrant
 ~~~~~~~~~~~~~~~
@@ -29,8 +23,6 @@ Running the vagrant image - it's that easy!
 .. code-block:: bash
 
     vagrant up
-
-
 
 Manual Web Server Configuration
 -------------------------------
