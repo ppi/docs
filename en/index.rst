@@ -5,16 +5,20 @@ PPI is the PHP Interoperability Framework. It provides an equal and open platfor
 
 PPI bootstraps framework components for you from the top frameworks such as `ZendFramework2`_,  `Symfony2`_, `Laravel4`_, `Doctrine2`_
 
-The Book
---------
 
 In 7 short chapters (or less!) learn how to use PPI2 for your web projects.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    setup/index
-    book/index
+    book/setup
+    book/application
+    book/modules
+    book/routing
+    book/controllers
+    book/templating
+    book/services
+    book/datasource
 
 Configuration Reference
 -----------------------
