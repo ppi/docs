@@ -4,7 +4,8 @@
 Skeleton Application
 ====================
 
-The skeleton application is a fully-functional application that we have pre-built for you to get up and running as quickly as possible. Inside you'll find the PHP libraries (``vendor`` dir), a selection of useful modules, our recommended directory structure and some default configuration.
+The skeleton application is an app
+for you to get up and running as quickly as possible. Inside you'll find the PHP libraries (``vendor`` dir), a selection of useful modules, our recommended directory structure and some default configuration.
 
 First, lets review the file structure of the PPI skeleton application:
 
@@ -20,7 +21,6 @@ First, lets review the file structure of the PPI skeleton application:
         │   ├── config/                         # application configuration files
         │   │   ├── base/                       # base configuration to be extended by other environments
         │   │   │   ├── app.yml
-        │   │   │   └── datasource.yml
         │   │   ├── dev/                        # configuration for the development environment (``dev``)
         │   │   │   └── app.yml
         │   │   ├── prod/                       # configuration for the production environment (``prod``)
@@ -31,20 +31,7 @@ First, lets review the file structure of the PPI skeleton application:
         │       └── base.html.php
         │
         ├── modules/                            # application modules
-        │   ├── Application/
-        │   │   ├── Classes/
-        │   │   │   └── SomeClass.php
-        │   │   ├── Controller/
-        │   │   │   ├── Index.php
-        │   │   │   └── Shared.php
-        │   │   ├── Module.php
-        │   │   └── resources/
-        │   │       ├── config/
-        │   │       │   ├── config.php
-        │   │       │   └── routes.yml          # routing rules
-        │   │       └── views/
-        │   │           └── index/
-        │   │               └── index.html.php
+        │   ├── Application/
         │   ├── Framework/
         │   └── UserModule/
         │

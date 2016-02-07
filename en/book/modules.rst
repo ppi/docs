@@ -14,25 +14,20 @@ Your module starts with Module.php. You can have configuration on your module. Y
 
 .. code-block:: bash
 
-    modules/
-
-        Application/
-
-            Module.php
-
-            Controller/
-                Index.php
-
-            resources/
-
-                views/
-                    index/index.html.php
-                    index/list.html.php
-
-                config/
-                    config.php
-                    routes.yml
-
+    ├── Module.php
+    ├── resources
+    │   ├── config
+    │   │   └── config.yml
+    │   ├── routes
+    │   │   ├── laravel.php
+    │   │   └── symfony.yml
+    │   └── views
+    │       └── index
+    │           └── index.html.php
+    ├── src
+    │   ├── Controller
+    │   │   ├── Index.php
+    │   │   └── Shared.php
 
 The Module.php class
 --------------------
@@ -42,28 +37,20 @@ Every PPI module looks for a ``Module.php`` class file, this is the starting poi
 .. code-block:: php
 
     <?php
-
     namespace Application;
-
-    use PPI\Autoload;
-    use PPI\Module\AbstractModule;
+    use PPI\Framework\Module\AbstractModule;
 
     class Module extends AbstractModule
     {
-        public function init($e)
+        public function getAutoloaderConfig()
         {
-            Autoload::add(__NAMESPACE__, dirname(__DIR__));
-        }
-
-        /**
-         * Returns the module name. Defaults to the module namespace stripped
-         * of backslashes.
-         *
-         * @return string
-         */
-        public function getName()
-        {
-            return 'Application';
+            return array(
+                'Zend\Loader\StandardAutoloader' => array(
+                    'namespaces' => array(
+                        __NAMESPACE__ => __DIR__ . '/src/',
+                    ),
+                ),
+            );
         }
     }
 
@@ -73,11 +60,6 @@ Init
 The above code shows you the Module class, and the all important ``init()`` method. Why is it important? If you remember from The Skeleton Application section previously, we have defined in our ``modules.config.php`` config file an activeModules option, when PPI is booting up the modules defined activeModules it looks for each module's init() method and calls it.
 
 The ``init()`` method is run for every page request, and should not perform anything heavy. It is considered bad practice to utilize these methods for setting up or configuring instances of application resources such as a database connection, application logger, or mailer.
-
-Your modules resources
-----------------------
-
-``/Application/resources/`` is where non-PHP-class files live such as config files (``resources/config``) and views (``resources/views``). We encourage you to put your own custom config files in ``/resources/config/`` too.
 
 Configuration
 -------------
@@ -89,25 +71,8 @@ All the modules with getConfig() defined on them will be merged together to crea
 .. code-block:: php
 
     <?php
-
-    class Module extends AbstractModule 
+    class Module extends AbstractModule
     {
-        public function init($e)
-        {
-            Autoload::add(__NAMESPACE__, dirname(__DIR__));
-        }
-
-        /**
-         * Returns the module name. Defaults to the module namespace stripped
-         * of backslashes.
-         *
-         * @return string
-         */
-        public function getName()
-        {
-            return 'Application';
-        }
-
         /**
          * Returns configuration to merge with application configuration.
          *
@@ -126,6 +91,17 @@ Routing
 -------
 
 The getRoutes() method is how you inform PPI which routing vendor you'd like to use for this single module. More on this in the Routing section
+
+.. code-block:: php
+
+    <?php
+    class Module extends AbstractModule
+    {
+        public function getRoutes()
+        {
+            return $this->loadSymfonyRoutes(__DIR__ . '/resources/routes/symfony.yml');
+        }
+    }
 
 Conclusion
 ----------
