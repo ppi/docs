@@ -87,25 +87,9 @@ All the modules with getConfig() defined on them will be merged together to crea
 .. tip::
     To help you troubleshoot the configuration loaded by the framework you may use the ``app/console config:dump`` command
 
-Routing
--------
-
-The getRoutes() method is how you inform PPI which routing vendor you'd like to use for this single module. More on this in the Routing section
-
-.. code-block:: php
-
-    <?php
-    class Module extends AbstractModule
-    {
-        public function getRoutes()
-        {
-            return $this->loadSymfonyRoutes(__DIR__ . '/resources/routes/symfony.yml');
-        }
-    }
-
 Conclusion
 ----------
 
-So far, we've learnt what methods to initialize our module, return configuration and return routes.
+So far, we've learnt what methods to initialize our module, setup autoloading and configuration.
 
 Lets move onto the Routing section to check out what happens next.
