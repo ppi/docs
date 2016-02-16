@@ -1,7 +1,7 @@
 PPI Framework
 =============
 
-PPI is the PHP Interoperability Framework. It provides an equal and open platform to empower PHP developers to pick the best tools from the best PHP frameworks.
+PPI is a framework delivery engine. Using the concept of microservices, it lets you choose which parts of frameworks you wish to use on a per-feature basis. As such each feature makes its own independent decisions, allowing you to pick the best tools from the best PHP frameworks
 
 PPI bootstraps framework components for you from the top frameworks such as `ZendFramework2`_,  `Symfony2`_, `Laravel4`_, `Doctrine2`_
 

@@ -5,60 +5,60 @@
 Services
 ========
 
-What is a Service?
-------------------
+Each of your features (modules) wants to be self-containers, isolated and in control of its own destiny. To keep such separation is a good thing (Separation of Responsibility prinicpal). Once you've got that nailed then you want to begin exposing information out of our feature. A popular architectural pattern is Service Oriented Architecture (SOA).
 
-Let's put it simple, a Service is any PHP object that performs some sort of "global" task. It's a generic name used in computer science to describe an object that's created for a specific purpose (e.g. an API Handler). Each service is used throughout your application whenever you need the specific functionality it provides. You don't have to do anything special to make a service; simply write a PHP class with some code that accomplishes a specific task.
+Services in PPI have names that you define. This can be something simple like ``cache`` or more complicated like ``cache.driver`` or it's even somewhat popular to use the Fully Qualified Class Name (FQCN) as the name of the service like this: ``MyService::class``. With that in mind it's just a string and it's up to you what convention you use just make sure it's consistent.
 
-.. note::
-    As a rule, a PHP object is a service if it is used globally in your application. A single Mailer service is used globally to send email messages whereas the many Message objects that it delivers are not services. Similarly, a Product object is not a service, but an object that persists Product objects to a database is a service.
+Defining the Service in our Module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Why using Services?
-~~~~~~~~~~~~~~~~~~~~
-
-The advantage of thinking about "services" is that you begin to think about separating each piece of functionality in your application into a series of services. Since each service does just one job, you can easily access each service and use its functionality wherever you need it. Each service can also be more easily tested and configured since it's separated from the other functionality in your application. This idea is called service-oriented architecture and is not unique to PPI Framework or even PHP. Structuring your application around a set of independent service classes is a well-known and trusted object-oriented best-practice. These skills are key to being a good developer in almost any language.
-
-Working with Services in PPI
-----------------------------
-
-Technically you can put your class file on any folder inside your module, this is because we use PSR0 for class autoloading, but for best practises we put all our file under the /Classes/ folder within a module.
-
-Defining the Service in our Module.php file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-To let our PPI app to know about the service, we need to declare it in our Module's Module.php file under the function getServiceConfig(), just as follows:
+Services are defined by our module in its Module.php class. This is ofcource optional but if you want to begin doing services from your module then the method is ``getServiceConfig``. This will be called on all modules that have it upon ``boot()`` of PPI. Be sure not to do anything expensive here or make network connections as that'll slow down your boot process which should be almost instantaneous and non-blocking.
 
 .. code-block:: php
 
     <?php
-    namespace ModuleName;
-
-    use PPI\Module\Module as BaseModule;
-    use PPI\Autoload;
-
-    class Module extends BaseModule
+    class Module extends AbstractModule
     {
-
-        // ....
 
         public function getServiceConfig()
         {
-            return array('factories' => array(
-
-                'foursquare.handler' => function($sm) {
-
-                    $handler = new \FourSquareModule\Classes\ApiHandler();
-                    $cache   = new \Doctrine\Common\Cache\ApcCache();
-                    $config  = $sm->get('config');
-
-                    $handler->setSecret($config['foursquare']['secret']);
-                    $handler->setKey($config['foursquare']['key']);
-                    $handler->setCache($cache);
-
-                    return $handler;
+            return ['factories' => [
+                'user.search' => UserSearchFactory::class,
+                'user.create' => UserCreateFactory::class,
+                'user.import' => function ($sm) {
+                   return new UserImportService($sm->get('Doctrine\ORM\EntityManager'));
                 }
+            ]];
+        }
 
-            ));
+    }
+
+Above you'll see two types of ways to create a service. One is a Factory class and one is an inline factory closure. It's recommended to use a Factory class but each to their own.
+
+Here's a factory class
+
+.. code-block:: php
+
+    <?php
+    namespace MyModule\Factory;
+
+    use Zend\ServiceManager\ServiceLocatorInterface;
+    use Zend\ServiceManager\FactoryInterface;
+    use MyModule\Service\UserSearchService;
+
+    class UserSearchFactory implements FactoryInterface
+    {
+        public function createService(ServiceLocatorInterface $sm)
+        {
+            $config = $sm->get('config');
+            if(!isset($config['usersearch']['search_key']) {
+                throw new \RuntimeException('Missing user search configuration');
+            }
+
+            return new UserSearchService(
+                $config['usersearch']['search_key'],
+                $sm->get('Doctrine\ORM\EntityManager')
+            );
         }
 
     }
@@ -66,21 +66,16 @@ To let our PPI app to know about the service, we need to declare it in our Modul
 Using services in our Controllers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use the services in our Controllers, we just need to call the function ->getService('service.name'), take the following code as a reference:
+To use the services in our Controllers, we just need to call ``$this->getService('service.name')``
 
 .. code-block:: php
 
     <?php
-    public function getVenuesAction()
+    public function searchUsersAction(Request $request, $lat, $long)
     {
+        $userSearchService = $this->getService('user.search');
+        $users = $userSearchService->getUsersFromLatLong($lat, $long);
 
-        $lat      = $this->getRouteParam('lat');
-        $lng      = $this->getRouteParam('lng');
-
-        // Let's instantiate the service and then use it.
-        $handler  = $this->getService('foursquare.handler');
-        $venues   = $handler->getVenues($lat, $lng);
-
-        return json_encode($venues);
+        return $this->render('MyModule:search:searchUsers.twig', compact('users'));
     }
 
