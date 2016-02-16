@@ -17,6 +17,13 @@ Services are defined by our module in its Module.php class. This is ofcource opt
 .. code-block:: php
 
     <?php
+    namespace MyModule;
+
+    use PPI\Framework\Module\AbstractModule;
+    use MyModule\Factory\UserSearchFactory;
+    use MyModule\Factory\UserCreateFactory;
+    use MyModule\Factory\UserImportService;
+
     class Module extends AbstractModule
     {
 
