@@ -21,10 +21,10 @@ Review the following route that we'll be matching.
 .. code-block:: yaml
 
     Blog_Show:
-        pattern: /blog/{id}
+        pattern: /blog/{blogId}
         defaults: { _controller: "Application:Blog:show"}
 
-So lets presume the route is ``/blog/show/{id}``, and look at what your controller would look like. Here is an example blog controller, based on some of the routes provided above.
+So lets presume the route is ``/blog/show/{blogId}``, and look at what your controller would look like. Here is an example blog controller, based on some of the routes provided above.
 
 .. code-block:: php
 
@@ -33,21 +33,20 @@ So lets presume the route is ``/blog/show/{id}``, and look at what your controll
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
+    class Blog extends BaseController
+    {
 
-        public function showAction() {
-
-            $blogID = $this->getRouteParam('id');
-
+        public function showAction(Request $request, $blogId)
+        {
             $bs = $this->getBlogStorage();
 
-            if(!$bs->existsByID($blogID)) {
+            if(!$bs->existsByID($blogId)) {
                 $this->setFlash('error', 'Invalid Blog ID');
                 return $this->redirectToRoute('Blog_Index');
             }
 
             // Get the blog post for this ID
-            $blogPost = $bs->getByID($blogID);
+            $blogPost = $bs->getByID($blogId);
 
             // Render our main blog page, passing in our $blogPost article to be rendered
             $this->render('Application:blog:show.html.php', compact('blogPost'));
@@ -67,17 +66,16 @@ Here we are still executing the same route, but making up some urls using route 
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function showAction() {
-
-            $blogID = $this->getRouteParam('id');
+    class Blog extends BaseController
+    {
+        public function showAction(Request $request, $blogId)
+        {
 
             // pattern: /about
             $aboutUrl = $this->generateUrl('About_Page');
 
-            // pattern: /blog/show/{id}
-            $blogPostUrl = $this->generateUrl('Blog_Post', array('id' => $blogID);
+            // pattern: /blog/show/{blogId}
+            $blogPostUrl = $this->generateUrl('Blog_Post', array('id' => $blogId);
 
         }
     }
@@ -94,9 +92,10 @@ An extremely handy way to send your users around your application is redirect th
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function showAction() {
+    class Blog extends BaseController
+    {
+        public function showAction(Request $request, $blogId)
+        {
 
             // Send user to /login, if they are not logged in
             if(!$this->isLoggedIn()) {
@@ -119,9 +118,11 @@ Working with ``POST`` values
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
+    class Blog extends BaseController
+    {
 
-        public function postAction() {
+        public function postAction()
+        {
 
             $this->getPost()->set('myKey', 'myValue');
 
@@ -148,11 +149,11 @@ Working with QueryString parameters
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-
+    class Blog extends BaseController
+    {
         // The URL is /blog/?action=show&id=453221
-        public function queryStringAction() {
+        public function queryStringAction()
+        {
 
             var_dump($this->getQueryString()->get('action')); // string('show')
             var_dump($this->getQueryString()->has('id')); // bool(true)
@@ -173,9 +174,10 @@ Working with server variables
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function serverAction() {
+    class Blog extends BaseController
+    {
+        public function serverAction()
+        {
 
             $this->getServer()->set('myKey', 'myValue');
 
@@ -202,9 +204,11 @@ Working with cookies
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
+    class Blog extends BaseController
+    {
 
-        public function cookieAction() {
+        public function cookieAction()
+        {
 
             $this->getCookie()->set('myKey', 'myValue');
 
@@ -231,16 +235,14 @@ Working with session values
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function sessionAction() {
-
+    class Blog extends BaseController
+    {
+        public function sessionAction()
+        {
             $this->getSession()->set('myKey', 'myValue');
 
             var_dump($this->getSession()->get('myKey')); // string('myValue')
-
             var_dump($this->getSession()->has('myKey')); // bool(true)
-
             var_dump($this->getSession()->remove('myKey'));
             var_dump($this->getSession()->has('myKey')); // bool(false)
 
@@ -262,10 +264,10 @@ Using the ``getConfig()`` method we can obtain the config array. This config arr
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function configAction() {
-
+    class Blog extends BaseController
+    {
+        public function configAction()
+        {
             $config = $this->getConfig();
 
             switch($config['mailer']) {
@@ -295,12 +297,11 @@ The ``is()`` method is a very expressive way of coding and has a variety of opti
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function isAction() {
-
+    class Blog extends BaseController
+    {
+        public function isAction()
+        {
             if($this->is('ajax')) {}
-
             if($this->is('post') {}
             if($this->is('patch') {}
             if($this->is('put') {}
@@ -326,10 +327,10 @@ Getting the user's IP address or user agent is very trivial.
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function userAction() {
-
+    class Blog extends BaseController
+    {
+        public function userAction()
+        {
             $userIP = $this->getIP();
             $userAgent = $this->getUserAgent();
         }
@@ -349,10 +350,10 @@ Review the following action, it is used to delete a blog item and you'll see a d
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function deleteAction() {
-
+    class Blog extends BaseController
+    {
+        public function deleteAction()
+        {
             $blogID = $this->getPost()->get('blogID');
 
             if(empty($blogID)) {
@@ -385,9 +386,10 @@ You may want to perform different scenarios based on the site's environment. Thi
 
     use Application\Controller\Shared as BaseController;
 
-    class Blog extends BaseController {
-
-        public function envAction() {
+    class Blog extends BaseController
+    {
+        public function envAction()
+        {
 
             $env = $this->getEnv();
             switch($env) {
