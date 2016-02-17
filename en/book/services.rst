@@ -37,12 +37,12 @@ Services are defined by our module in its Module.php class. This is ofcource opt
                 }
             ]];
         }
-
     }
 
 Above you'll see two types of ways to create a service. One is a Factory class and one is an inline factory closure. It's recommended to use a Factory class but each to their own.
 
-Here's a factory class
+Creating a Service Factory
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: php
 

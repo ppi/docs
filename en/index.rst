@@ -14,10 +14,10 @@ In 7 short chapters (or less!) learn how to use PPI2 for your web projects.
     book/installation
     book/application
     book/modules
+    book/services
     book/routing
     book/controllers
     book/templating
-    book/services
     book/datasource
 
 Configuration Reference
