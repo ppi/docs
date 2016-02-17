@@ -5,14 +5,15 @@
 Services
 ========
 
-Each of your features (modules) wants to be self-containers, isolated and in control of its own destiny. To keep such separation is a good thing (Separation of Responsibility prinicpal). Once you've got that nailed then you want to begin exposing information out of our feature. A popular architectural pattern is Service Oriented Architecture (SOA).
+Each of your features (modules) wants to be self-contained, isolated and in control of its own destiny. To keep such separation is a good thing (Separation of Responsibility principal). Once you've got that nailed then you want to begin exposing information out of your module. A popular architectural pattern is Service Oriented Architecture (SOA).
 
-Services in PPI have names that you define. This can be something simple like ``cache`` or more complicated like ``cache.driver`` or it's even somewhat popular to use the Fully Qualified Class Name (FQCN) as the name of the service like this: ``MyService::class``. With that in mind it's just a string and it's up to you what convention you use just make sure it's consistent.
+Services in PPI have names that you define. This can be something simple like ``user.search`` or ``cache.driver`` or it's even somewhat popular to use the Fully Qualified Class Name (FQCN) as the name of the service like this: ``MyService::class``. With that in mind it's just a string and it's up to you what convention you use just make sure it's consistent.
 
 Defining the Service in our Module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Services are defined by our module in its Module.php class. This is ofcource optional but if you want to begin doing services from your module then the method is ``getServiceConfig``. This will be called on all modules that have it upon ``boot()`` of PPI. Be sure not to do anything expensive here or make network connections as that'll slow down your boot process which should be almost instantaneous and non-blocking.
+This is of course optional for your module but if you want to begin doing services then the method is ``getServiceConfig``.
+This will be called on all modules upon ``boot()`` of PPI. Boot should be almost instantaneous and non-blocking, so be sure not to do anything expensive here such as make network connections, as that'll slow down your boot process.
 
 .. code-block:: php
 

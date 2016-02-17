@@ -42,6 +42,21 @@ Every PPI module looks for a ``Module.php`` class file, this is the starting poi
 
     class Module extends AbstractModule
     {
+    }
+
+Autoloading
+-----------
+
+Registering your namespace can be done using the Zend Framework approach below. You can also skip this and register your module's namespace to your ``composer.json`` file
+
+.. code-block:: php
+
+    <?php
+    namespace Application;
+    use PPI\Framework\Module\AbstractModule;
+
+    class Module extends AbstractModule
+    {
         public function getAutoloaderConfig()
         {
             return array(
@@ -60,6 +75,19 @@ Init
 The above code shows you the Module class, and the all important ``init()`` method. Why is it important? If you remember from The Skeleton Application section previously, we have defined in our ``modules.config.php`` config file an activeModules option, when PPI is booting up the modules defined activeModules it looks for each module's init() method and calls it.
 
 The ``init()`` method is run for every page request, and should not perform anything heavy. It is considered bad practice to utilize these methods for setting up or configuring instances of application resources such as a database connection, application logger, or mailer.
+
+.. code-block:: php
+
+    <?php
+    namespace Application;
+    use PPI\Framework\Module\AbstractModule;
+
+    class Module extends AbstractModule
+    {
+        public function init()
+        {
+        }
+    }
 
 Configuration
 -------------
@@ -90,6 +118,4 @@ All the modules with getConfig() defined on them will be merged together to crea
 Conclusion
 ----------
 
-So far, we've learnt what methods to initialize our module, setup autoloading and configuration.
-
-Lets move onto the Routing section to check out what happens next.
+Lets move onto Services and Routing for our modules on the next pages.
