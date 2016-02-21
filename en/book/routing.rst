@@ -7,8 +7,8 @@ Routing
 
 Routes are the rules that tell the framework what URLs map to what actions of your application.
 
-When PPI is booting up it will take call ```getRoutes()``` on each module and register its entry within the main ```ChainRouter```, which is a router stack.
-PPI will call ```match``` on each router in the order that your modules have been defined in your application config.
+When PPI is booting up it will take call ``getRoutes()`` on each module and register its entry within the main ``ChainRouter``, which is a router stack.
+PPI will call ``match`` on each router in the order that your modules have been defined in your application config.
 
 PPI provides bindings for popular PHP routers which you will see examples of below. Review the documentation for each router to learn more about using them.
 

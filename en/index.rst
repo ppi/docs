@@ -18,6 +18,7 @@ In 7 short chapters (or less!) learn how to use PPI2 for your web projects.
     book/routing
     book/controllers
     book/templating
+    book/commands
     book/datasource
 
 Configuration Reference

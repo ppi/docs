@@ -13,7 +13,7 @@ Making commands for your modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Commands get auto-magically registered up by the PPI ``boot()`` process, by placing your files in a ``Command`` directory at the root of where your module's namespace is registered, thus so there's no need to open up your ``app/console`` file and add them in there manually.
-If you place a Command class into a ``/Command`` directory of your module then it will be registered. All command classes need the ```Command.php``` suffix.
+If you place a Command class into a ``Command`` directory of your module's source code then it will be registered. All command classes need the ``Command.php`` suffix.
 
 Make your command class
 
