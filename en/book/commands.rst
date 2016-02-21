@@ -7,15 +7,12 @@ Commands
 
 The PPI commands layer is powered by Symfony2 directly with no change in behaviour. You can also just drop in any Symfony2 command and it will be executable for you.
 
-In PPI console there's a very thin layer we've added on top top of it to allow your commands to talk to the rest of your app and its services in the context of PPI, so be conscious of this when considering the portability of your console commands between technologies that support symfony2 commands.
+In PPI console there's a very thin layer we've added on top of it to allow your commands to talk to the rest of your app and its services in the context of PPI, so be conscious of this when considering the portability of your console commands between technologies that support symfony2 commands.
 
 Making commands for your modules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Commands get auto-magically registered up by the PPI ``boot()`` process, by placing your files in a ``Command`` directory at the root of where your module's namespace is registered, thus so there's no need to open up your ``app/console`` file and add them in there manually.
-If you place a Command class into a ``Command`` directory of your module's source code then it will be registered. All command classes need the ``Command.php`` suffix.
-
-Make your command class
+Commands get auto-magically discovered by the PPI ``boot()`` process, by placing your files in a ``src/Command`` of your module. Thus so there's no need to open up your ``app/console`` file and add them in there manually. By convention, all Command classes need the ``Command.php`` suffix: ``i.e: UserImportCommand.php``
 
 .. code-block:: bash
 
@@ -49,7 +46,7 @@ Make your command class
 Verifying your commands have been registered
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to verify that your command is successfully being registered, then run app/console and you should see your command appear just like below.
+In order to verify that your command is successfully being registered, just run ``app/console`` and you should see your command appear just like below.
 
 .. code-block:: bash
 
@@ -116,7 +113,7 @@ Configuration is actually just a service named ``config`` so you access it like 
 Customising the commands directory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default PPI will scan your module's `src/Command` directory. If this doesn't suit your needs then it's very easy to change this in your ``Module.php`` file.
+By default PPI will scan your module's ``src/Command`` directory. If this doesn't suit your needs then it's very easy to change this in your ``Module.php`` file.
 
 .. code-block:: php
 
@@ -128,7 +125,7 @@ By default PPI will scan your module's `src/Command` directory. If this doesn't 
          */
         public function getCommandsPath()
         {
-            return __DIR__ . '/src/SomeCustom/Path';
+            return __DIR__ . '/src/SomeCustom/Path/To/Commands';
         }
     }
 
