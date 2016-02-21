@@ -113,3 +113,22 @@ Configuration is actually just a service named ``config`` so you access it like 
         $userConfig = $config['user'];
     }
 
+Customising the commands directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default PPI will scan your module's `src/Command` directory. If this doesn't suit your needs then it's very easy to change this in your ``Module.php`` file.
+
+.. code-block:: php
+
+    <?php
+    class Module extends AbstractModule
+    {
+        /*
+         * @return string
+         */
+        public function getCommandsPath()
+        {
+            return __DIR__ . '/src/SomeCustom/Path';
+        }
+    }
+

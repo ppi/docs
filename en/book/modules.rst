@@ -37,7 +37,7 @@ Every PPI module looks for a ``Module.php`` class file, this is the starting poi
 .. code-block:: php
 
     <?php
-    namespace Application;
+    namespace MyModule;
     use PPI\Framework\Module\AbstractModule;
 
     class Module extends AbstractModule
@@ -52,7 +52,7 @@ Registering your namespace can be done using the Zend Framework approach below. 
 .. code-block:: php
 
     <?php
-    namespace Application;
+    namespace MyModule;
     use PPI\Framework\Module\AbstractModule;
 
     class Module extends AbstractModule
@@ -79,7 +79,7 @@ The ``init()`` method is run for every page request, and should not perform anyt
 .. code-block:: php
 
     <?php
-    namespace Application;
+    namespace MyModule;
     use PPI\Framework\Module\AbstractModule;
 
     class Module extends AbstractModule
@@ -99,6 +99,9 @@ All the modules with getConfig() defined on them will be merged together to crea
 .. code-block:: php
 
     <?php
+    namespace MyModule;
+    use PPI\Framework\Module\AbstractModule;
+
     class Module extends AbstractModule
     {
         /**
